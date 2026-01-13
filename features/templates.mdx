@@ -1,141 +1,101 @@
 ---
-title: "Templates"
-description: "Start building faster with professional templates"
+title: "App Foundation"
+description: "The technology stack powering your Kleap apps"
 ---
 
-Templates give you a head start with pre-built designs and functionality. Customize them with AI to match your vision.
+Every Kleap app is built on a modern, production-ready foundation.
 
-## Using Templates
+## Technology Stack
 
-### Browse Templates
+When you create an app, you get:
 
-1. Click **Templates** in the sidebar or home page
-2. Browse by category or search
-3. Preview any template before using
+| Technology | Purpose |
+|------------|---------|
+| **Next.js 16** | React framework with App Router |
+| **TypeScript** | Type-safe code |
+| **Tailwind CSS** | Utility-first styling |
+| **shadcn/ui** | Professional component library |
+| **Supabase** | Database, auth, and storage |
 
-### Create from Template
+## What's Pre-Configured
 
-1. Click **Use Template** on your chosen template
-2. A new app is created with all the template code
-3. Start customizing with AI chat
-
-<Info>
-  Templates are starting points. Customize everything - colors, content, layout, features.
-</Info>
-
-## Template Categories
-
-### SaaS & Business
-
-Professional templates for software products:
-
-- **Project Management** - Kanban boards, task lists, team dashboards
-- **CRM** - Customer management, sales pipelines
-- **Analytics Dashboard** - Charts, metrics, data visualization
-- **Admin Panel** - User management, settings, data tables
-
-### E-commerce
-
-Ready-to-sell templates:
-
-- **Online Store** - Product listings, cart, checkout
-- **Digital Products** - Downloads, licenses, subscriptions
-- **Marketplace** - Multi-vendor, search, filters
-
-### Portfolio & Creative
-
-Showcase your work:
-
-- **Developer Portfolio** - Projects, skills, experience
-- **Designer Portfolio** - Gallery, case studies
-- **Agency Website** - Services, team, testimonials
-- **Artist Portfolio** - Gallery, exhibitions, contact
-
-### Content & Blog
-
-Content-focused templates:
-
-- **Personal Blog** - Posts, categories, comments
-- **Magazine** - Featured articles, sections
-- **Documentation** - Docs, guides, API reference
-
-### Landing Pages
-
-Conversion-optimized pages:
-
-- **Product Launch** - Hero, features, pricing, CTA
-- **SaaS Landing** - Benefits, testimonials, signup
-- **App Download** - Screenshots, features, download links
-- **Coming Soon** - Email capture, countdown
-
-### Industry-Specific
-
-Templates for specific businesses:
-
-- **Restaurant** - Menu, reservations, location
-- **Fitness/Gym** - Classes, trainers, membership
-- **Real Estate** - Listings, search, agent profiles
-- **Healthcare** - Services, doctors, appointments
-
-## Template Features
-
-All templates include:
-
-| Feature | Included |
-|---------|----------|
-| Responsive design | Mobile, tablet, desktop |
-| Dark mode | Theme toggle support |
-| SEO optimized | Meta tags, sitemap |
-| Performance | Optimized images, lazy loading |
-| Accessibility | ARIA labels, keyboard navigation |
-
-## Customizing Templates
-
-After creating from a template, customize with AI:
-
-### Change Branding
+### Project Structure
 
 ```
-Change the logo to show "MyCompany" and update
-the primary color to #3B82F6 (blue)
+your-app/
+├── app/                  # Pages and routes
+├── components/           # React components
+├── lib/                  # Utilities
+├── public/               # Static assets
+└── styles/               # CSS files
 ```
 
-### Modify Content
+### Dependencies Included
+
+- React 19
+- Next.js 16
+- Tailwind CSS
+- shadcn/ui components
+- Supabase client
+- Lucide icons
+
+### Configuration
+
+- TypeScript configured
+- ESLint rules set
+- Tailwind theme ready
+- Path aliases (@/)
+
+## Building with AI
+
+Instead of modifying template code manually, you describe what you want:
+
+### Create Components
 
 ```
-Replace the hero text with: "Build faster with AI"
-and update the subheading to describe our product
+Add a pricing section with three tiers:
+Free, Pro, and Enterprise
 ```
 
 ### Add Features
 
 ```
-Add a newsletter signup form to the footer with
-email validation
+Add user authentication with
+Google login and email signup
 ```
 
-### Remove Sections
+### Style Changes
 
 ```
-Remove the testimonials section from the homepage
+Change the color scheme to blue
+with a modern, clean design
 ```
 
-## Tips
+## Best Practices
 
 <AccordionGroup>
-  <Accordion title="Start with the closest match">
-    Choose a template that matches your overall structure, even if the content is different. It's easier to change text and colors than layout.
+  <Accordion title="Start simple">
+    Begin with a basic description, then add features incrementally.
   </Accordion>
 
-  <Accordion title="Keep what works">
-    Don't remove everything. Templates have tested designs and patterns. Keep the good parts.
+  <Accordion title="Be specific">
+    The more detail you provide, the better the AI understands your vision.
   </Accordion>
 
-  <Accordion title="Mobile-first changes">
-    When customizing, check mobile view regularly. Templates are responsive, but your changes might need adjustments.
+  <Accordion title="Iterate">
+    Build in small steps. Test each change before moving on.
   </Accordion>
 </AccordionGroup>
 
-<Card title="Browse All Templates" icon="grid" href="/features/templates-gallery">
-  See our full template gallery
+## Customization
+
+Everything is customizable via AI:
+
+- **Layout** - Page structure, navigation, sections
+- **Styling** - Colors, fonts, spacing, animations
+- **Components** - Forms, tables, cards, modals
+- **Features** - Auth, database, payments, APIs
+
+<Card title="Start Building" icon="play" href="/introduction/getting-started">
+  Create your first app
 </Card>

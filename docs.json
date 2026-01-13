@@ -51,12 +51,17 @@
             "pages": [
               "features/overview",
               "features/ai-chat",
-              "features/templates",
-              "features/templates-gallery",
               "features/live-preview",
               "features/element-selection",
               "features/code-editor",
               "features/version-history"
+            ]
+          },
+          {
+            "group": "App Foundation",
+            "pages": [
+              "features/templates",
+              "features/templates-gallery"
             ]
           },
           {
