@@ -3,8 +3,6 @@ title: "Self Hosting"
 description: "Deploy your app to your own infrastructure"
 ---
 
-# Self Hosting
-
 While Kleap deploys to Vercel by default, you can self-host your app elsewhere.
 
 ## Getting Your Code
@@ -36,20 +34,10 @@ cd your-app
 ### Setup
 
 ```bash
-# Install dependencies
 npm install
-
-# Create .env file
 cp .env.example .env.local
-
-# Add your environment variables
-# NEXT_PUBLIC_SUPABASE_URL=...
-# NEXT_PUBLIC_SUPABASE_ANON_KEY=...
-
-# Run development server
 npm run dev
 ```
-
 Visit `http://localhost:3000`
 
 ### Build for Production
@@ -72,11 +60,9 @@ Even for self-managed, Vercel is easy:
 ### Netlify
 
 ```bash
-# netlify.toml
 [build]
   command = "npm run build"
   publish = ".next"
-
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 ```
@@ -123,15 +109,11 @@ CMD ["npm", "start"]
 Required variables for your app to work:
 
 ```bash
-# Supabase (if using database)
 NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
-
-# Other services
 STRIPE_SECRET_KEY=sk_...
 RESEND_API_KEY=re_...
 ```
-
 <Warning>
   Never commit `.env` files. Add them to `.gitignore` and configure in your hosting platform.
 </Warning>
@@ -187,9 +169,7 @@ For extra features:
 ### GitHub Actions
 
 ```yaml
-# .github/workflows/deploy.yml
 name: Deploy
-
 on:
   push:
     branches: [main]

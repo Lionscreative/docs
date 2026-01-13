@@ -3,8 +3,6 @@ title: "GitHub"
 description: "Version control and code backup with GitHub"
 ---
 
-# GitHub Integration
-
 Push your Kleap app code to GitHub for version control, backup, and collaboration.
 
 ## Why GitHub?
@@ -148,10 +146,8 @@ Your repository can use GitHub Actions for:
 ### Example Workflow
 
 ```yaml
-# .github/workflows/ci.yml
 name: CI
 on: [push, pull_request]
-
 jobs:
   test:
     runs-on: ubuntu-latest
