@@ -1,0 +1,295 @@
+---
+title: "NPM Packages"
+description: "Install and use third-party packages"
+---
+
+# NPM Packages
+
+Extend your app's functionality with NPM packages.
+
+## Installing Packages
+
+### Via AI
+
+Simply ask:
+
+```
+"Install react-hook-form for better form handling"
+```
+
+```
+"Add date-fns for date formatting"
+```
+
+The AI will:
+1. Add the package to package.json
+2. Import it where needed
+3. Use it in your code
+
+### Automatic Installation
+
+When AI writes code using a package, it's automatically installed on next preview refresh.
+
+## Popular Packages
+
+### Forms
+
+| Package | Use Case |
+|---------|----------|
+| **react-hook-form** | Form state management |
+| **zod** | Schema validation |
+| **@hookform/resolvers** | Zod + react-hook-form |
+
+```
+"Add a contact form using react-hook-form with Zod validation"
+```
+
+### Dates
+
+| Package | Use Case |
+|---------|----------|
+| **date-fns** | Date formatting/manipulation |
+| **dayjs** | Lightweight date library |
+
+```
+"Format the created_at date using date-fns"
+```
+
+### UI Enhancements
+
+| Package | Use Case |
+|---------|----------|
+| **framer-motion** | Animations |
+| **react-hot-toast** | Toast notifications |
+| **sonner** | Modern toast library |
+
+```
+"Add entrance animations using framer-motion"
+```
+
+### Data Fetching
+
+| Package | Use Case |
+|---------|----------|
+| **@tanstack/react-query** | Data fetching & caching |
+| **swr** | Data fetching hooks |
+
+```
+"Use React Query to fetch and cache the user data"
+```
+
+### Charts
+
+| Package | Use Case |
+|---------|----------|
+| **recharts** | React charts |
+| **chart.js** | Canvas charts |
+| **react-chartjs-2** | Chart.js for React |
+
+```
+"Add a line chart showing monthly revenue using recharts"
+```
+
+### Utilities
+
+| Package | Use Case |
+|---------|----------|
+| **lodash** | Utility functions |
+| **clsx** | Conditional classes |
+| **uuid** | Generate unique IDs |
+
+## Using Installed Packages
+
+Once installed, use in your code:
+
+```typescript
+// Importing
+import { format } from 'date-fns';
+import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+
+// Using
+const formattedDate = format(new Date(), 'MMM d, yyyy');
+```
+
+## Pre-Installed Packages
+
+These are already available:
+
+### Core
+
+- `next` - Framework
+- `react` - UI library
+- `typescript` - Type safety
+- `tailwindcss` - Styling
+
+### shadcn/ui Dependencies
+
+- `@radix-ui/*` - Headless components
+- `lucide-react` - Icons
+- `clsx` - Class utilities
+- `tailwind-merge` - Tailwind class merging
+
+### Database
+
+- `@supabase/supabase-js` - Database client
+
+## Package Versions
+
+### Checking Versions
+
+Ask AI to check or update:
+
+```
+"What version of react-hook-form is installed?"
+```
+
+```
+"Update framer-motion to the latest version"
+```
+
+### Version Compatibility
+
+The AI typically installs compatible versions. If you need a specific version:
+
+```
+"Install react-hook-form version 7.48.0"
+```
+
+## TypeScript Types
+
+Many packages include types. For those that don't:
+
+```
+"Install the TypeScript types for lodash"
+```
+
+This adds `@types/lodash`.
+
+## Common Package Tasks
+
+### Add Authentication
+
+```
+"Add OAuth login with the next-auth package"
+```
+
+### Add Email
+
+```
+"Install @sendgrid/mail for sending emails"
+```
+
+### Add Markdown
+
+```
+"Add support for rendering markdown content using react-markdown"
+```
+
+### Add PDF Generation
+
+```
+"Install @react-pdf/renderer for generating PDF invoices"
+```
+
+## Package Size Considerations
+
+Be mindful of bundle size:
+
+### Check Size
+
+Use [bundlephobia.com](https://bundlephobia.com) to check package sizes.
+
+### Lightweight Alternatives
+
+| Heavy | Lighter Alternative |
+|-------|---------------------|
+| moment.js | date-fns, dayjs |
+| lodash | lodash-es, individual imports |
+| axios | native fetch |
+
+### Tree Shaking
+
+Import only what you need:
+
+```typescript
+// ❌ Imports entire library
+import _ from 'lodash';
+
+// ✅ Imports only needed function
+import debounce from 'lodash/debounce';
+```
+
+## Server vs Client Packages
+
+### Server-Only
+
+Some packages should only run on server:
+
+```typescript
+// This runs only on server
+import { someServerThing } from 'server-package';
+
+export async function GET() {
+  // Use server package here
+}
+```
+
+### Client-Only
+
+Some packages need browser APIs:
+
+```typescript
+'use client';
+
+import { ClientComponent } from 'client-package';
+```
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Package not found">
+    - Check package name spelling
+    - Package might not exist on npm
+    - Try searching npmjs.com for correct name
+  </Accordion>
+
+  <Accordion title="Module not found after install">
+    - Refresh the preview
+    - Package might need time to install
+    - Check import path is correct
+  </Accordion>
+
+  <Accordion title="Types not found">
+    - Install @types/package-name
+    - Some packages include types already
+    - Check package documentation
+  </Accordion>
+
+  <Accordion title="Version conflict">
+    - Ask AI to resolve version conflict
+    - Check peer dependencies
+    - May need to update other packages
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Use established packages" icon="star">
+    Choose well-maintained packages with good documentation
+  </Card>
+  <Card title="Check bundle size" icon="weight">
+    Consider impact on app performance
+  </Card>
+  <Card title="Import selectively" icon="filter">
+    Import only functions you need
+  </Card>
+  <Card title="Keep updated" icon="arrows-rotate">
+    Update packages for security fixes
+  </Card>
+</CardGroup>
+
+<Card title="Custom Fonts" icon="font" href="/tips/custom-fonts">
+  Add typography packages
+</Card>

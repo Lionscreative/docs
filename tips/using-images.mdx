@@ -1,0 +1,305 @@
+---
+title: "Using Images"
+description: "Best practices for images in your app"
+---
+
+# Using Images
+
+Learn how to effectively use images in your Kleap app.
+
+## Adding Images
+
+### From URL
+
+Use any public image URL:
+
+```
+"Add a hero image using this URL: https://example.com/hero.jpg"
+```
+
+### Uploading Images
+
+Upload to your app's public folder:
+
+```
+"Add an image to the about page. I'll upload it to the public folder."
+```
+
+Images go in `public/` and are accessible at `/image-name.jpg`.
+
+### AI-Generated Placeholders
+
+For development, use placeholder services:
+
+```
+"Use placeholder images from Unsplash for the team section.
+Search for professional headshots."
+```
+
+## Next.js Image Component
+
+Always use the Next.js Image component for optimization:
+
+```typescript
+import Image from 'next/image';
+
+<Image
+  src="/hero.jpg"
+  alt="Hero image"
+  width={1200}
+  height={600}
+  priority
+/>
+```
+
+### Benefits
+
+- **Automatic optimization** - WebP/AVIF conversion
+- **Lazy loading** - Images load as needed
+- **Responsive** - Serves correct size
+- **No layout shift** - Prevents CLS
+
+### Ask AI to Convert
+
+```
+"Convert all img tags to Next.js Image components with
+proper width, height, and alt text"
+```
+
+## Image Best Practices
+
+### File Formats
+
+| Format | Best For |
+|--------|----------|
+| **WebP** | Photos, general use |
+| **PNG** | Logos, icons, transparency |
+| **SVG** | Icons, illustrations |
+| **AVIF** | Best compression (newer) |
+
+### File Sizes
+
+Keep images optimized:
+
+- **Hero images**: < 200KB
+- **Content images**: < 100KB
+- **Thumbnails**: < 30KB
+
+### Dimensions
+
+Provide images at appropriate sizes:
+
+```typescript
+// For responsive images
+<Image
+  src="/product.jpg"
+  alt="Product"
+  sizes="(max-width: 768px) 100vw, 50vw"
+  fill
+/>
+```
+
+## Responsive Images
+
+### Fill Mode
+
+For flexible sizing:
+
+```typescript
+<div className="relative w-full h-64">
+  <Image
+    src="/hero.jpg"
+    alt="Hero"
+    fill
+    className="object-cover"
+  />
+</div>
+```
+
+### Responsive Sizes
+
+Tell the browser what size to load:
+
+```typescript
+<Image
+  src="/photo.jpg"
+  alt="Photo"
+  width={800}
+  height={600}
+  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+/>
+```
+
+## External Images
+
+### Configure Domains
+
+For external images, add to config:
+
+```
+"I want to use images from unsplash.com.
+Can you add it to the Next.js image configuration?"
+```
+
+```typescript
+// next.config.js
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
+  },
+};
+```
+
+### Common Domains
+
+Popular image services:
+
+- `images.unsplash.com`
+- `cdn.pixabay.com`
+- `res.cloudinary.com`
+- Your Supabase storage URL
+
+## User-Uploaded Images
+
+### Supabase Storage
+
+Store user uploads in Supabase:
+
+```
+"Add image upload functionality that saves to Supabase storage
+and displays in the user's profile"
+```
+
+### Display from Storage
+
+```typescript
+const imageUrl = supabase.storage
+  .from('avatars')
+  .getPublicUrl(fileName);
+
+<Image src={imageUrl} alt="Avatar" width={100} height={100} />
+```
+
+## Background Images
+
+### CSS Background
+
+For decorative backgrounds:
+
+```typescript
+<div
+  className="bg-cover bg-center h-96"
+  style={{ backgroundImage: 'url(/pattern.svg)' }}
+>
+  Content here
+</div>
+```
+
+### With Overlay
+
+```typescript
+<div className="relative h-96">
+  <Image src="/hero.jpg" alt="" fill className="object-cover" />
+  <div className="absolute inset-0 bg-black/50" />
+  <div className="relative z-10 text-white">
+    Content here
+  </div>
+</div>
+```
+
+## Icons
+
+### Lucide Icons
+
+Kleap uses Lucide icons (via shadcn/ui):
+
+```typescript
+import { Home, Settings, User } from 'lucide-react';
+
+<Home className="w-6 h-6" />
+```
+
+### SVG Icons
+
+For custom icons:
+
+```typescript
+<svg className="w-6 h-6" viewBox="0 0 24 24">
+  {/* SVG paths */}
+</svg>
+```
+
+## Alt Text Guidelines
+
+Always provide descriptive alt text:
+
+```typescript
+// ❌ Bad
+<Image src="/team.jpg" alt="image" />
+<Image src="/team.jpg" alt="" />
+
+// ✅ Good
+<Image src="/team.jpg" alt="Our team of five developers at the office" />
+```
+
+### When to Use Empty Alt
+
+Decorative images that don't convey information:
+
+```typescript
+<Image src="/decoration.svg" alt="" role="presentation" />
+```
+
+## Common Image Patterns
+
+### Hero with Image
+
+```
+"Create a hero section with a large background image,
+overlay, and centered text content"
+```
+
+### Image Gallery
+
+```
+"Add an image gallery with a grid layout that opens
+images in a lightbox when clicked"
+```
+
+### Avatar
+
+```
+"Add user avatars to the comments section using the
+user's profile image from Supabase storage"
+```
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Image not loading">
+    - Check the file path is correct
+    - Verify image exists in public folder
+    - For external images, check domain is configured
+  </Accordion>
+
+  <Accordion title="Image looks blurry">
+    - Provide higher resolution source image
+    - Check width/height props match aspect ratio
+    - Use quality prop for higher quality
+  </Accordion>
+
+  <Accordion title="Layout shift when loading">
+    - Always specify width and height
+    - Use placeholder="blur" for blur-up effect
+    - Use fill with sized container
+  </Accordion>
+</AccordionGroup>
+
+<Card title="Using Videos" icon="video" href="/tips/using-videos">
+  Learn how to embed videos in your app
+</Card>

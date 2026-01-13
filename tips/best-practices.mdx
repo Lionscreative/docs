@@ -1,0 +1,241 @@
+---
+title: "Best Practices"
+description: "Guidelines for building successful apps with Kleap"
+---
+
+# Best Practices
+
+Follow these guidelines to build better apps faster.
+
+## Planning Your App
+
+### Start with a Clear Vision
+
+Before opening Kleap:
+
+1. **Define your goal** - What problem does this app solve?
+2. **List core features** - What must it do? (Start with 3-5)
+3. **Sketch the flow** - How will users navigate?
+4. **Identify data** - What information needs storing?
+
+### Choose the Right Template
+
+Templates give you a head start:
+
+- **SaaS Template** - User auth, dashboard, billing
+- **Portfolio** - Personal sites, portfolios
+- **Landing Page** - Marketing, product launches
+- **E-commerce** - Product sales, checkout
+
+Or start blank if you have a unique idea.
+
+## Building Incrementally
+
+### Small Steps Win
+
+<CardGroup cols={2}>
+  <Card title="Do this" icon="check">
+    Build one feature at a time, test it, then add the next
+  </Card>
+  <Card title="Not this" icon="xmark">
+    Try to build everything at once in one long prompt
+  </Card>
+</CardGroup>
+
+### Recommended Build Order
+
+<Steps>
+  <Step title="Layout">
+    Header, footer, navigation structure
+  </Step>
+  <Step title="Pages">
+    Create main pages with placeholder content
+  </Step>
+  <Step title="Components">
+    Build reusable components (cards, forms, etc.)
+  </Step>
+  <Step title="Styling">
+    Refine colors, typography, spacing
+  </Step>
+  <Step title="Data">
+    Connect database, add real content
+  </Step>
+  <Step title="Functionality">
+    Add interactions, forms, features
+  </Step>
+  <Step title="Polish">
+    Responsive fixes, loading states, error handling
+  </Step>
+</Steps>
+
+## Code Organization
+
+### Let AI Follow Conventions
+
+Kleap uses standard Next.js structure:
+
+```
+app/           → Pages and routes
+components/    → Reusable components
+lib/           → Utility functions
+public/        → Static assets
+```
+
+Don't fight this structure. Let AI organize code appropriately.
+
+### Component Reusability
+
+Ask for reusable components:
+
+```
+"Create a Card component that I can reuse across different
+sections with customizable title, description, and icon"
+```
+
+Then reference them:
+
+```
+"Use the Card component to display the pricing tiers"
+```
+
+## Styling Guidelines
+
+### Consistent Design
+
+Establish design tokens early:
+
+```
+"Use these colors throughout the app:
+- Primary: blue-600
+- Secondary: gray-600
+- Background: gray-50
+- Accent: purple-500"
+```
+
+### Mobile First
+
+Always consider mobile:
+
+```
+"Make sure this section works well on mobile devices,
+with stacked layout and appropriate text sizes"
+```
+
+## Database Best Practices
+
+### Plan Your Schema
+
+Before asking AI to create tables:
+
+1. List what data you need
+2. Define relationships
+3. Consider what queries you'll run
+
+### Enable Security
+
+Always ask for Row Level Security:
+
+```
+"Create a posts table and set up RLS so users can only
+see and edit their own posts"
+```
+
+## Performance Tips
+
+### Optimize Images
+
+```
+"Use Next.js Image component for all images with
+appropriate sizes and lazy loading"
+```
+
+### Minimize Client Components
+
+```
+"Make this a server component that fetches data
+on the server side"
+```
+
+### Add Loading States
+
+```
+"Add a loading skeleton while the data is being fetched"
+```
+
+## Testing Your App
+
+### Test as You Build
+
+After each change:
+
+1. Check the preview
+2. Test on mobile view
+3. Click through the flow
+4. Look for errors in console
+
+### Test Edge Cases
+
+- Empty states (no data)
+- Error states (failed requests)
+- Loading states
+- Long content
+- Many items
+
+## Before Publishing
+
+### Checklist
+
+- [ ] All pages load without errors
+- [ ] Forms work and validate
+- [ ] Mobile layout looks good
+- [ ] Links and buttons work
+- [ ] Images load properly
+- [ ] Auth flow works (if applicable)
+- [ ] Database queries work
+- [ ] Environment variables set
+
+### Environment Variables
+
+Move all secrets to environment variables:
+
+```
+"Move the API key to an environment variable and
+update the code to use process.env.API_KEY"
+```
+
+## Common Mistakes to Avoid
+
+<AccordionGroup>
+  <Accordion title="Building too much at once">
+    Break large features into smaller prompts. Test after each change.
+  </Accordion>
+
+  <Accordion title="Ignoring mobile">
+    Always test mobile view. Many users browse on phones.
+  </Accordion>
+
+  <Accordion title="Hardcoding data">
+    Use database or props instead of hardcoded content for dynamic data.
+  </Accordion>
+
+  <Accordion title="Skipping error handling">
+    Always handle what happens when things fail (no data, API errors).
+  </Accordion>
+
+  <Accordion title="Not using templates">
+    Templates save hours of work. Start with one when possible.
+  </Accordion>
+</AccordionGroup>
+
+## Getting Help
+
+When stuck:
+
+1. **Check the docs** - Answer might be here
+2. **Ask AI to explain** - "Why isn't this working?"
+3. **Use version history** - Roll back if needed
+4. **Join Discord** - Community can help
+
+<Card title="Troubleshooting" icon="wrench" href="/tips/troubleshooting">
+  Solutions to common problems
+</Card>

@@ -1,0 +1,144 @@
+---
+title: "Live Preview"
+description: "See your app in real-time as you build"
+---
+
+# Live Preview
+
+The live preview shows your app running in real-time. Every change you make appears instantly.
+
+## How It Works
+
+Your app runs in a cloud sandbox (powered by Daytona) that:
+
+- **Hot reloads** when code changes
+- **Persists state** during your session
+- **Runs real Next.js** - same as production
+
+## Preview Panel
+
+The preview panel on the right side of the editor shows:
+
+- Your running application
+- Real-time updates as you code
+- Interactive elements (click, type, navigate)
+
+### Controls
+
+| Control | Action |
+|---------|--------|
+| **Refresh** | Reload the preview |
+| **Open in new tab** | View in full browser window |
+| **Device toggle** | Switch between desktop/tablet/mobile |
+| **URL bar** | Navigate to different pages |
+
+## Auto-Stop Behavior
+
+<Warning>
+  The preview automatically stops after **15 minutes of inactivity** to save resources.
+</Warning>
+
+### Restarting the Preview
+
+When stopped, restart by:
+
+1. **Send a new message** - Any chat interaction restarts it
+2. **Click Refresh** - In the preview panel
+3. **Navigate to the app** - From the apps list
+
+### Session State
+
+When the preview restarts:
+
+- Code changes are preserved
+- Database data persists (Supabase)
+- Local state/session resets
+
+## Preview URL
+
+Your preview runs at a temporary URL:
+
+```
+https://3000-[sandbox-id].proxy.daytona.works
+```
+
+<Info>
+  This URL is temporary and requires authentication. For permanent, shareable URLs, [publish to Vercel](/features/publishing).
+</Info>
+
+## Testing Your App
+
+### Interactive Testing
+
+In the preview, you can:
+
+- Click buttons and links
+- Fill out forms
+- Navigate between pages
+- Test responsive layouts
+
+### Mobile Testing
+
+Click the device toggle to switch between:
+
+- **Desktop** (1280px+)
+- **Tablet** (768px)
+- **Mobile** (375px)
+
+### Console Access
+
+Open browser DevTools to see:
+
+- Console logs
+- Network requests
+- JavaScript errors
+
+## Performance
+
+The preview runs on cloud infrastructure with:
+
+- Fast startup (under 2 seconds)
+- Hot module replacement
+- Automatic dependency installation
+
+## Common Issues
+
+<AccordionGroup>
+  <Accordion title="Preview not loading">
+    1. Check if you have a stable internet connection
+    2. Try refreshing the preview
+    3. Send a new message to restart the sandbox
+    4. Clear browser cache and reload
+  </Accordion>
+
+  <Accordion title="Preview stopped unexpectedly">
+    The preview auto-stops after 15 minutes. Send any message to restart it.
+  </Accordion>
+
+  <Accordion title="Changes not showing">
+    1. Wait a few seconds for hot reload
+    2. Try refreshing the preview
+    3. Check for errors in the chat
+  </Accordion>
+
+  <Accordion title="Slow preview">
+    Large apps or complex operations may take longer. Consider:
+    - Breaking changes into smaller steps
+    - Optimizing images and assets
+    - Removing unused code
+  </Accordion>
+</AccordionGroup>
+
+## Preview vs Production
+
+| Aspect | Preview | Production |
+|--------|---------|------------|
+| URL | Temporary | Permanent |
+| Access | Authenticated | Public |
+| Uptime | During editing | 24/7 |
+| Speed | Development mode | Optimized |
+| Features | Full | Full |
+
+<Card title="Ready to go live?" icon="rocket" href="/features/publishing">
+  Publish your app to production
+</Card>

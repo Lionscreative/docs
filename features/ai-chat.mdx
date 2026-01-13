@@ -1,0 +1,158 @@
+---
+title: "AI Chat"
+description: "Build applications through natural conversation"
+---
+
+# AI Chat
+
+The AI Chat is your main interface for building apps with Kleap. Simply describe what you want, and the AI generates the code.
+
+## How It Works
+
+1. **Describe your request** in the chat input
+2. **AI processes** your request and generates code
+3. **Preview updates** in real-time
+4. **Iterate** by sending follow-up messages
+
+## Writing Effective Prompts
+
+### Be Specific
+
+<Tabs>
+  <Tab title="Good">
+    ```
+    Create a contact form with fields for name, email,
+    and message. Add a submit button that shows a
+    success toast when clicked.
+    ```
+  </Tab>
+  <Tab title="Too Vague">
+    ```
+    Add a form
+    ```
+  </Tab>
+</Tabs>
+
+### Include Context
+
+Tell the AI where and how:
+
+```
+Add a testimonials section to the homepage, below
+the features section. Use a carousel with 3 cards
+showing customer photos, names, and quotes.
+```
+
+### Reference Existing Elements
+
+```
+Change the header background to match the footer color
+```
+
+```
+Make the pricing cards look like the feature cards above
+```
+
+## Example Prompts
+
+### Creating Components
+
+```
+Create a pricing table with 3 tiers: Free, Pro, and
+Enterprise. Include feature lists and CTA buttons.
+```
+
+### Styling Changes
+
+```
+Make the hero section full-height with a gradient
+background from purple to blue
+```
+
+### Adding Functionality
+
+```
+Add user authentication with email/password login
+and a sign-up form
+```
+
+### Fixing Issues
+
+```
+The button on mobile is too small. Increase the
+padding and font size on screens below 768px
+```
+
+## Chat Features
+
+### Message History
+
+Your conversation is saved automatically. Scroll up to see previous messages and the AI's responses.
+
+### Regenerate Response
+
+If you're not happy with a response, you can ask the AI to try again:
+
+```
+That's not quite right. Can you try a different approach?
+```
+
+### Credit Usage
+
+Each message consumes credits based on complexity:
+
+| Request Type | Typical Cost |
+|--------------|--------------|
+| Simple styling change | 1-3 credits |
+| New component | 5-15 credits |
+| Full page/feature | 20-50 credits |
+
+<Info>
+  You can see your remaining credits in the top navigation bar.
+</Info>
+
+## Tips for Better Results
+
+<AccordionGroup>
+  <Accordion title="Break complex requests into steps">
+    Instead of asking for an entire app at once, build incrementally:
+    1. "Create the homepage layout"
+    2. "Add a navigation header"
+    3. "Create the hero section"
+    4. "Add the features grid"
+  </Accordion>
+
+  <Accordion title="Reference design systems">
+    Mention styles you like:
+    - "Use a clean, minimal design like Linear"
+    - "Make it colorful and playful like Notion"
+    - "Professional and corporate like Stripe"
+  </Accordion>
+
+  <Accordion title="Provide examples">
+    Share references:
+    - "Similar to how Airbnb shows listings"
+    - "Like a Trello board layout"
+  </Accordion>
+
+  <Accordion title="Iterate in small steps">
+    Make one change at a time for precise control:
+    - "Increase the heading size"
+    - "Add more spacing between sections"
+    - "Change the button color to green"
+  </Accordion>
+</AccordionGroup>
+
+## Common Issues
+
+<Warning>
+  If the AI seems stuck or gives unexpected results:
+  1. Be more specific in your request
+  2. Break it into smaller steps
+  3. Reference specific files or components
+  4. Refresh and try again
+</Warning>
+
+<Card title="Learn Prompt Engineering" icon="lightbulb" href="/prompting/overview">
+  Master the art of prompting for better results
+</Card>

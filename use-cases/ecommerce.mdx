@@ -1,0 +1,303 @@
+---
+title: "E-commerce Store"
+description: "Build an online store"
+---
+
+# Build an E-commerce Store
+
+Create an online store to sell products with shopping cart and checkout.
+
+## What We're Building
+
+An e-commerce store with:
+
+- Product catalog with categories
+- Product detail pages
+- Shopping cart
+- Checkout with Stripe
+- Order confirmation
+
+## Prerequisites
+
+- Kleap account
+- Supabase account
+- Stripe account
+
+## Step 1: Set Up Database
+
+### Create Tables
+
+```
+Create database tables for an e-commerce store:
+
+1. products
+   - id (uuid, primary key)
+   - name (text)
+   - description (text)
+   - price (numeric)
+   - image_url (text)
+   - category (text)
+   - inventory (integer)
+   - created_at (timestamp)
+
+2. orders
+   - id (uuid, primary key)
+   - user_id (uuid, nullable)
+   - email (text)
+   - status (text: 'pending', 'paid', 'shipped', 'delivered')
+   - total (numeric)
+   - stripe_session_id (text)
+   - created_at (timestamp)
+
+3. order_items
+   - id (uuid, primary key)
+   - order_id (uuid, references orders)
+   - product_id (uuid, references products)
+   - quantity (integer)
+   - price (numeric)
+
+Make products publicly readable.
+```
+
+### Add Sample Products
+
+```
+Add 6 sample products to the database:
+- Mix of different categories
+- Realistic prices
+- Placeholder images from Unsplash
+```
+
+## Step 2: Product Catalog
+
+### Homepage
+
+```
+Create an e-commerce homepage with:
+- Hero banner with featured products or sale
+- Category navigation
+- Featured products grid (4-6 items)
+- "View All Products" link
+```
+
+### Products Page
+
+```
+Create a products page that:
+- Shows all products in a responsive grid
+- Has category filter tabs
+- Has sort options (price, newest)
+- Shows product cards with image, name, price, add to cart
+- Handles empty state
+```
+
+### Product Card
+
+```
+Create a product card component with:
+- Product image (hover zoom effect)
+- Product name
+- Price display
+- "Add to Cart" button
+- Quick view option
+- Sale badge (if discounted)
+```
+
+## Step 3: Product Detail Page
+
+```
+Create a product detail page at /products/[id] with:
+- Large product image gallery
+- Product name and price
+- Full description
+- Quantity selector
+- "Add to Cart" button
+- Related products section
+- Back to products link
+```
+
+### Image Gallery
+
+```
+Add an image gallery to product pages:
+- Main large image
+- Thumbnail strip below
+- Click thumbnail to change main image
+- Lightbox on click
+```
+
+## Step 4: Shopping Cart
+
+### Cart State
+
+```
+Implement shopping cart functionality:
+- Store cart in localStorage (persists across sessions)
+- Add to cart function
+- Remove from cart function
+- Update quantity function
+- Calculate totals
+```
+
+### Cart Sidebar
+
+```
+Create a cart sidebar/drawer that:
+- Opens when clicking cart icon
+- Shows list of cart items
+- Each item shows: image, name, quantity, price, remove button
+- Shows subtotal
+- Has "Continue Shopping" and "Checkout" buttons
+- Shows empty cart message when empty
+```
+
+### Cart Icon
+
+```
+Add a cart icon to the navigation that:
+- Shows current item count badge
+- Opens cart sidebar on click
+- Updates dynamically when items added
+```
+
+## Step 5: Checkout
+
+### Stripe Setup
+
+Add Stripe environment variables:
+
+```
+STRIPE_SECRET_KEY=sk_...
+STRIPE_PUBLISHABLE_KEY=pk_...
+```
+
+### Checkout Flow
+
+```
+Create a checkout flow:
+1. Cart review page showing all items
+2. Shipping address form
+3. Create Stripe checkout session with cart items
+4. Redirect to Stripe for payment
+5. Success page after payment
+```
+
+### Create Checkout Session
+
+```
+Create an API route for Stripe checkout:
+- Receive cart items from client
+- Create line items for Stripe
+- Create checkout session
+- Return session URL
+- Include success and cancel URLs
+```
+
+### Order Confirmation
+
+```
+Create an order confirmation page that:
+- Shows after successful payment
+- Displays order number
+- Lists ordered items
+- Shows total paid
+- Includes "Continue Shopping" button
+- Sends to email if logged in
+```
+
+## Step 6: Order Management (Optional)
+
+### Orders Page
+
+```
+Create an orders page for logged-in users:
+- List of past orders
+- Order status
+- Order details on click
+- Reorder button
+```
+
+### Admin Dashboard (Optional)
+
+```
+Create a simple admin page to:
+- View all orders
+- Update order status
+- View basic sales stats
+```
+
+## Step 7: Polish
+
+### Loading States
+
+```
+Add loading states:
+- Product grid skeleton while loading
+- Button spinner when adding to cart
+- Checkout button loading state
+```
+
+### Error Handling
+
+```
+Add error handling:
+- Show error if product fails to load
+- Handle out of stock items
+- Display payment errors gracefully
+```
+
+### Mobile Optimization
+
+```
+Optimize for mobile:
+- Full-screen cart on mobile
+- Touch-friendly product gallery
+- Mobile-optimized checkout
+- Easy quantity adjustments
+```
+
+## Step 8: Launch
+
+### Pre-Launch Checklist
+
+- [ ] All products display correctly
+- [ ] Add to cart works
+- [ ] Cart updates correctly
+- [ ] Checkout creates Stripe session
+- [ ] Payment processes successfully
+- [ ] Order confirmation shows
+- [ ] Mobile works well
+
+### Deploy
+
+1. Click **Publish**
+2. Test with Stripe test cards
+3. Switch to live Stripe keys
+4. Connect custom domain
+
+## Enhancements
+
+After launching, consider adding:
+
+- **User accounts** - Save shipping info, order history
+- **Reviews** - Product ratings and reviews
+- **Wishlists** - Save products for later
+- **Search** - Search products by name
+- **Inventory tracking** - Update stock on purchase
+- **Email notifications** - Order confirmation emails
+- **Discount codes** - Coupon system
+
+## Complete Prompt Flow
+
+1. Database setup
+2. Homepage with featured products
+3. Products listing page
+4. Product detail page
+5. Shopping cart functionality
+6. Stripe checkout integration
+7. Order confirmation
+8. Polish and mobile optimization
+
+<Card title="Stripe Integration" icon="credit-card" href="/integrations/stripe">
+  Complete Stripe setup guide
+</Card>

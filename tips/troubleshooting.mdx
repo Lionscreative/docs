@@ -1,0 +1,259 @@
+---
+title: "Troubleshooting"
+description: "Solutions to common problems"
+---
+
+# Troubleshooting
+
+Quick solutions to common issues you might encounter.
+
+## Preview Issues
+
+### Preview Not Loading
+
+**Symptoms**: White screen, infinite loading, or error message
+
+**Solutions**:
+
+1. **Wait a moment** - Preview can take a few seconds to start
+2. **Send a message** - Any message restarts the preview
+3. **Check for errors** - Look at the error message in chat
+4. **Refresh** - Click the refresh button in preview panel
+5. **Check internet** - Ensure stable connection
+
+### Preview Stopped
+
+**Symptom**: Preview says "Sandbox stopped" or similar
+
+**Cause**: Preview auto-stops after 15 minutes of inactivity
+
+**Solution**: Send any message or click refresh to restart
+
+### Changes Not Showing
+
+**Symptoms**: Made changes but preview looks the same
+
+**Solutions**:
+
+1. Wait for hot reload (few seconds)
+2. Click refresh in preview
+3. Hard refresh browser (Cmd/Ctrl + Shift + R)
+4. Check for errors that might prevent rendering
+
+## Build Errors
+
+### Syntax Errors
+
+**Symptom**: Error mentioning unexpected token, syntax, or parsing
+
+**Solution**:
+```
+I'm getting a syntax error. Can you check and fix the code?
+[paste error message]
+```
+
+### Missing Dependencies
+
+**Symptom**: "Cannot find module" or "Module not found"
+
+**Solution**:
+```
+Getting "Cannot find module 'xyz'" error.
+Can you add this dependency and fix the import?
+```
+
+### Type Errors
+
+**Symptom**: TypeScript errors about types
+
+**Solution**:
+```
+Getting this type error: [error message]
+Can you fix the typing?
+```
+
+## Database Issues
+
+### Connection Failed
+
+**Symptoms**: "Failed to connect to database", "Supabase error"
+
+**Solutions**:
+
+1. Check Supabase project is active (not paused)
+2. Verify environment variables are set
+3. Check your Supabase connection in settings
+
+```
+The database connection is failing. Can you check the
+Supabase configuration and environment variables?
+```
+
+### Queries Return Empty
+
+**Symptom**: Data exists but queries return empty array
+
+**Causes**:
+- RLS policies blocking access
+- Wrong table name
+- Query filters too restrictive
+
+**Solution**:
+```
+This query returns empty but there's data in the table.
+Can you check the RLS policies and query?
+```
+
+### Auth Not Working
+
+**Symptoms**: Can't sign up, login fails, session lost
+
+**Solutions**:
+
+1. Check Supabase Auth settings
+2. Verify redirect URLs are configured
+3. Check for errors in browser console
+
+```
+User authentication isn't working - [describe specific issue].
+Can you debug the auth flow?
+```
+
+## Deployment Issues
+
+### Build Failed on Vercel
+
+**Symptom**: Publish fails with build error
+
+**Solutions**:
+
+1. Check the build log for specific error
+2. Share error message with AI
+3. Common fixes: missing dependencies, type errors
+
+```
+Vercel build is failing with this error: [error message]
+Can you fix it?
+```
+
+### Environment Variables Missing
+
+**Symptom**: Works in preview but fails in production
+
+**Cause**: Environment variables not set for production
+
+**Solution**:
+
+1. Go to Settings > Environment
+2. Add all required variables
+3. Set them for Production scope
+4. Redeploy
+
+### Domain Not Working
+
+**Symptom**: Custom domain shows error or old site
+
+**Solutions**:
+
+1. Verify DNS records are correct
+2. Wait for propagation (up to 48 hours)
+3. Check SSL certificate status
+4. Ensure domain is verified in settings
+
+## Visual Issues
+
+### Layout Broken
+
+**Symptom**: Elements overlapping, wrong positioning
+
+**Solution**:
+```
+The layout is broken - [describe what's wrong].
+Can you fix the CSS/positioning?
+```
+
+### Not Responsive
+
+**Symptom**: Looks bad on mobile
+
+**Solution**:
+```
+This page doesn't work well on mobile. The [specific issue].
+Can you make it responsive?
+```
+
+### Styling Not Applied
+
+**Symptom**: CSS changes not appearing
+
+**Solutions**:
+
+1. Check for CSS conflicts
+2. Verify class names are correct
+3. Check Tailwind config if using custom values
+
+## Performance Issues
+
+### Page Loading Slowly
+
+**Solutions**:
+
+1. Optimize images
+2. Add loading states
+3. Use server components where possible
+4. Lazy load non-critical content
+
+```
+This page is loading slowly. Can you optimize it?
+Consider image optimization, code splitting, and server components.
+```
+
+### Too Many Re-renders
+
+**Symptom**: Page feels sluggish, constant updates
+
+**Solution**:
+```
+The page seems to be re-rendering too often and feels slow.
+Can you optimize the component to prevent unnecessary renders?
+```
+
+## Quick Fixes
+
+| Problem | Quick Fix |
+|---------|-----------|
+| Preview stuck | Send any message to restart |
+| Build error | Share error message with AI |
+| Styling broken | Clear browser cache, refresh |
+| Auth not working | Check Supabase dashboard |
+| Deploy failed | Check build logs in Vercel |
+| Data not loading | Check RLS policies |
+| Changes lost | Use version history to restore |
+
+## When Nothing Works
+
+### Roll Back
+
+1. Go to version history
+2. Find a working version
+3. Restore it
+4. Try a different approach
+
+### Start Fresh
+
+For severe issues:
+
+1. Create a new app
+2. Use a template as base
+3. Re-implement features carefully
+4. Test after each change
+
+### Get Help
+
+- **Discord** - Community support
+- **Email** - support@kleap.co
+- **Docs** - Search for specific error
+
+<Card title="Error Reference" icon="circle-exclamation" href="/tips/error-reference">
+  Detailed guide to specific error messages
+</Card>

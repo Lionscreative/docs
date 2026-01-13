@@ -1,0 +1,168 @@
+---
+title: "Analytics"
+description: "Track your app's performance and visitor metrics"
+---
+
+# Analytics
+
+Understand how users interact with your app using built-in analytics.
+
+## Vercel Analytics
+
+Published apps include Vercel Analytics:
+
+- **Page views** - Track which pages are visited
+- **Unique visitors** - Count individual users
+- **Referrers** - See where traffic comes from
+- **Geography** - Visitor locations
+- **Devices** - Desktop, mobile, tablet breakdown
+
+## Enabling Analytics
+
+Analytics are automatically enabled when you publish to Vercel.
+
+### Viewing Analytics
+
+1. Go to **Settings** > **Analytics**
+2. Or visit your Vercel dashboard directly
+
+### Dashboard Metrics
+
+| Metric | Description |
+|--------|-------------|
+| **Visitors** | Unique users in time period |
+| **Page Views** | Total page loads |
+| **Bounce Rate** | Single-page visit percentage |
+| **Avg. Duration** | Time spent on site |
+| **Top Pages** | Most visited pages |
+| **Top Referrers** | Traffic sources |
+
+## Web Vitals
+
+Track Core Web Vitals for performance:
+
+- **LCP** (Largest Contentful Paint) - Loading performance
+- **FID** (First Input Delay) - Interactivity
+- **CLS** (Cumulative Layout Shift) - Visual stability
+
+<Info>
+  Good Web Vitals improve SEO rankings and user experience.
+</Info>
+
+## Real-Time Data
+
+See visitors on your site right now:
+
+- Current active users
+- Pages being viewed
+- Geographic distribution
+
+## Time Periods
+
+View analytics for different periods:
+
+- Last 24 hours
+- Last 7 days
+- Last 30 days
+- Custom date range
+
+## Traffic Sources
+
+Understand where your visitors come from:
+
+| Source | Examples |
+|--------|----------|
+| **Direct** | Typed URL, bookmarks |
+| **Search** | Google, Bing, DuckDuckGo |
+| **Social** | Twitter, LinkedIn, Facebook |
+| **Referral** | Other websites linking to you |
+
+## Geographic Data
+
+See visitor locations:
+
+- Country breakdown
+- City-level data (Pro plan)
+- Map visualization
+
+## Device Analytics
+
+Understand your audience's devices:
+
+- **Desktop** vs **Mobile** vs **Tablet**
+- **Browser** breakdown (Chrome, Safari, Firefox)
+- **Operating System** (Windows, macOS, iOS, Android)
+
+## Privacy Compliance
+
+Vercel Analytics is privacy-friendly:
+
+- No cookies required
+- GDPR compliant
+- No personal data collected
+- Anonymized visitor data
+
+<Tip>
+  Unlike Google Analytics, Vercel Analytics doesn't require cookie consent banners.
+</Tip>
+
+## Exporting Data
+
+Export analytics data:
+
+1. Go to Vercel dashboard
+2. Navigate to Analytics
+3. Click **Export** (CSV format)
+
+## Third-Party Analytics
+
+You can also add other analytics tools:
+
+### Google Analytics
+
+Add to your app via AI chat:
+
+```
+Add Google Analytics with tracking ID G-XXXXXXXXXX
+```
+
+### Other Options
+
+- **Plausible** - Privacy-focused
+- **Fathom** - Simple, fast
+- **Mixpanel** - Product analytics
+- **PostHog** - Open-source analytics
+
+## Analytics Plans
+
+| Feature | Free | Pro | Business |
+|---------|------|-----|----------|
+| Page views | 10K/mo | 100K/mo | Unlimited |
+| Data retention | 24 hours | 30 days | 1 year |
+| Real-time | ✓ | ✓ | ✓ |
+| Web Vitals | ✓ | ✓ | ✓ |
+| Export | - | ✓ | ✓ |
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Check analytics regularly">
+    Review weekly to understand trends and identify issues.
+  </Accordion>
+
+  <Accordion title="Monitor Web Vitals">
+    Keep LCP < 2.5s, FID < 100ms, CLS < 0.1 for good scores.
+  </Accordion>
+
+  <Accordion title="Track important pages">
+    Focus on conversion pages (pricing, signup, checkout).
+  </Accordion>
+
+  <Accordion title="Compare periods">
+    Compare week-over-week to spot growth or problems.
+  </Accordion>
+</AccordionGroup>
+
+<Card title="Improve Your SEO" icon="magnifying-glass" href="/tips/seo">
+  Use analytics insights to optimize for search engines
+</Card>

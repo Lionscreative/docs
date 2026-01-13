@@ -1,0 +1,196 @@
+---
+title: "AI Models"
+description: "The AI technology powering Kleap"
+---
+
+# AI Models
+
+Kleap uses advanced AI models to understand your requests and generate code.
+
+## How Kleap Uses AI
+
+When you send a message, Kleap:
+
+1. **Understands** your intent and context
+2. **Plans** the changes needed
+3. **Generates** high-quality code
+4. **Applies** changes to your app
+5. **Verifies** the result works
+
+## AI Capabilities
+
+### What AI Can Do
+
+<CardGroup cols={2}>
+  <Card title="Create Components" icon="puzzle-piece">
+    Build React components from descriptions
+  </Card>
+  <Card title="Style Applications" icon="palette">
+    Apply CSS, Tailwind, and design systems
+  </Card>
+  <Card title="Add Functionality" icon="code">
+    Implement features, logic, and interactions
+  </Card>
+  <Card title="Integrate Services" icon="plug">
+    Connect databases, APIs, and third-party services
+  </Card>
+  <Card title="Debug Issues" icon="bug">
+    Find and fix errors in your code
+  </Card>
+  <Card title="Refactor Code" icon="arrows-rotate">
+    Improve code structure and organization
+  </Card>
+</CardGroup>
+
+### What AI Does Best
+
+- **UI Creation** - Turning descriptions into beautiful interfaces
+- **CRUD Operations** - Database interactions and forms
+- **Authentication** - User login and signup flows
+- **Responsive Design** - Mobile-friendly layouts
+- **Common Patterns** - Standard web app features
+
+### What Requires More Guidance
+
+- **Complex Business Logic** - Be specific about rules
+- **Custom Algorithms** - Provide clear requirements
+- **Unique Designs** - Reference examples or provide details
+- **Integration Edge Cases** - Specify expected behaviors
+
+## Prompt Tips for Best Results
+
+### Be Specific
+
+```
+❌ "Make it better"
+✅ "Increase the heading size to 3xl and add more padding around the cards"
+```
+
+### Provide Context
+
+```
+❌ "Add a button"
+✅ "Add a 'Save Draft' button next to the existing 'Publish' button that saves the post without publishing"
+```
+
+### Break Down Complex Tasks
+
+Instead of:
+```
+Build a complete e-commerce checkout with cart, shipping, and payment
+```
+
+Try:
+```
+1. "Create a shopping cart component showing items and total"
+2. "Add a shipping address form"
+3. "Integrate Stripe checkout"
+```
+
+## Code Quality
+
+AI-generated code follows best practices:
+
+| Aspect | Standard |
+|--------|----------|
+| **Framework** | Next.js 15 with App Router |
+| **Language** | TypeScript with proper types |
+| **Styling** | Tailwind CSS utilities |
+| **Components** | shadcn/ui component library |
+| **Structure** | Component-based architecture |
+| **Accessibility** | Semantic HTML, ARIA labels |
+
+## Context Understanding
+
+The AI understands:
+
+- **Your entire codebase** - Existing components and patterns
+- **Selected elements** - What you clicked in the preview
+- **Conversation history** - Previous messages in the session
+- **Project structure** - File organization and imports
+
+<Info>
+  The more you build, the better the AI understands your project's patterns and preferences.
+</Info>
+
+## Token Usage
+
+Each message uses tokens (similar to words):
+
+- **Input tokens** - Your message and context
+- **Output tokens** - AI's response and code
+
+### Optimizing Token Usage
+
+- Be concise but specific
+- Use element selection to provide context
+- Reference existing components by name
+- Break large tasks into smaller messages
+
+## AI Limitations
+
+Be aware of these limitations:
+
+### Knowledge Cutoff
+
+The AI's training data has a cutoff date. For very recent:
+- Library versions
+- API changes
+- New features
+
+Provide documentation links or examples if needed.
+
+### Context Window
+
+Very large projects may exceed context limits. If this happens:
+- Focus on specific files
+- Reference components by name
+- Break work into sessions
+
+### Non-Deterministic Output
+
+AI may generate slightly different code for the same prompt. This is normal. If you need specific output:
+- Be more precise in your request
+- Provide examples of desired format
+- Use element selection for context
+
+## Privacy & Security
+
+### Your Code
+
+- Code is sent to AI for processing
+- Not used to train future models
+- Processed securely via encrypted connections
+
+### Sensitive Data
+
+<Warning>
+  Never include API keys, passwords, or secrets in prompts. Use environment variables instead.
+</Warning>
+
+## Improving Results
+
+### If AI Gets It Wrong
+
+1. **Clarify** - Rephrase with more detail
+2. **Correct** - Point out what's wrong
+3. **Example** - Show what you expect
+4. **Undo** - Use version history to roll back
+
+### Iteration Tips
+
+```
+"That's close, but change the button color to blue instead of green"
+```
+
+```
+"The layout is good, but make the sidebar fixed instead of scrolling"
+```
+
+```
+"Undo that last change and instead..."
+```
+
+<Card title="Prompting Best Practices" icon="lightbulb" href="/prompting/best-practices">
+  Learn how to write effective prompts
+</Card>

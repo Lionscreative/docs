@@ -1,0 +1,294 @@
+---
+title: "Self Hosting"
+description: "Deploy your app to your own infrastructure"
+---
+
+# Self Hosting
+
+While Kleap deploys to Vercel by default, you can self-host your app elsewhere.
+
+## Getting Your Code
+
+### Export to GitHub
+
+1. Connect GitHub in settings
+2. Push your code to a repository
+3. Clone the repository locally
+
+```bash
+git clone https://github.com/you/your-app.git
+cd your-app
+```
+
+### Download ZIP
+
+1. Go to **Settings** > **Export**
+2. Click **Download ZIP**
+3. Extract and open in your editor
+
+## Running Locally
+
+### Prerequisites
+
+- Node.js 18+
+- npm or pnpm
+
+### Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Create .env file
+cp .env.example .env.local
+
+# Add your environment variables
+# NEXT_PUBLIC_SUPABASE_URL=...
+# NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+
+# Run development server
+npm run dev
+```
+
+Visit `http://localhost:3000`
+
+### Build for Production
+
+```bash
+npm run build
+npm start
+```
+
+## Hosting Options
+
+### Vercel (Recommended)
+
+Even for self-managed, Vercel is easy:
+
+1. Connect GitHub repo to Vercel
+2. Configure environment variables
+3. Deploy automatically on push
+
+### Netlify
+
+```bash
+# netlify.toml
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+```
+
+### Railway
+
+1. Connect GitHub repo
+2. Railway auto-detects Next.js
+3. Configure environment variables
+
+### DigitalOcean App Platform
+
+1. Create new app
+2. Connect GitHub repository
+3. Select Next.js buildpack
+4. Configure environment variables
+
+### Docker
+
+```dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+ENV NODE_ENV production
+EXPOSE 3000
+
+CMD ["npm", "start"]
+```
+
+### AWS (Amplify)
+
+1. Connect to Amplify Console
+2. Select your repository
+3. Amplify auto-detects Next.js
+4. Configure build settings
+
+## Environment Variables
+
+Required variables for your app to work:
+
+```bash
+# Supabase (if using database)
+NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+
+# Other services
+STRIPE_SECRET_KEY=sk_...
+RESEND_API_KEY=re_...
+```
+
+<Warning>
+  Never commit `.env` files. Add them to `.gitignore` and configure in your hosting platform.
+</Warning>
+
+## Supabase Considerations
+
+### Keep Using Supabase Cloud
+
+Your Supabase project continues working:
+
+- Database stays on Supabase Cloud
+- Auth continues working
+- Storage accessible from anywhere
+
+Just ensure your environment variables point to your Supabase project.
+
+### Self-Host Supabase (Advanced)
+
+For complete self-hosting:
+
+1. Deploy Supabase with Docker
+2. Configure your own PostgreSQL
+3. Update environment variables
+
+See [Supabase Self-Hosting Guide](https://supabase.com/docs/guides/self-hosting).
+
+## Custom Domains
+
+### On Your Host
+
+Most platforms support custom domains:
+
+1. Add domain in hosting dashboard
+2. Configure DNS:
+   ```
+   A record → your-host-ip
+   or
+   CNAME → your-app.host.com
+   ```
+3. SSL is usually automatic
+
+### Cloudflare (Recommended)
+
+For extra features:
+
+1. Add site to Cloudflare
+2. Update nameservers
+3. Configure DNS to point to your host
+4. Get free SSL, CDN, and protection
+
+## CI/CD Setup
+
+### GitHub Actions
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm run build
+      # Add deployment step for your platform
+```
+
+## Monitoring
+
+### Error Tracking
+
+Add error monitoring:
+
+- **Sentry** - Error tracking
+- **LogRocket** - Session replay
+- **Bugsnag** - Error reporting
+
+### Analytics
+
+Add analytics:
+
+- **Vercel Analytics** - Simple (Vercel only)
+- **Plausible** - Privacy-focused
+- **Google Analytics** - Comprehensive
+
+### Uptime Monitoring
+
+- **UptimeRobot** - Free monitoring
+- **Pingdom** - Professional monitoring
+- **Better Uptime** - Status pages
+
+## Performance
+
+### Build Optimization
+
+```javascript
+// next.config.js
+module.exports = {
+  // Optimize images
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
+  // Compress output
+  compress: true,
+};
+```
+
+### CDN
+
+Use a CDN for static assets:
+
+- Cloudflare (free)
+- CloudFront (AWS)
+- Fastly
+
+## Comparison
+
+| Platform | Ease | Cost | Control |
+|----------|------|------|---------|
+| **Vercel** | ⭐⭐⭐ | $$ | Medium |
+| **Netlify** | ⭐⭐⭐ | $$ | Medium |
+| **Railway** | ⭐⭐ | $$ | High |
+| **DigitalOcean** | ⭐⭐ | $ | High |
+| **AWS** | ⭐ | $$$ | Full |
+| **Docker/VPS** | ⭐ | $ | Full |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Build fails">
+    - Check Node.js version matches
+    - Verify all dependencies install
+    - Check environment variables are set
+    - Review build logs for specific errors
+  </Accordion>
+
+  <Accordion title="Database connection fails">
+    - Verify Supabase URL and key
+    - Check IP allowlist if using Supabase
+    - Ensure environment variables are available at runtime
+  </Accordion>
+
+  <Accordion title="Routes not working">
+    - Ensure platform supports Next.js routing
+    - Check rewrites configuration
+    - Verify _next folder is served correctly
+  </Accordion>
+</AccordionGroup>
+
+<Card title="Publishing to Vercel" icon="rocket" href="/features/publishing">
+  The easiest deployment option
+</Card>

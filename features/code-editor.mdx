@@ -1,0 +1,144 @@
+---
+title: "Code Editor"
+description: "View and edit your app's source code"
+---
+
+# Code Editor
+
+While AI handles most code generation, you can view and understand the source code of your app at any time.
+
+## Accessing the Code
+
+### File Browser
+
+Click the **Files** tab in the left sidebar to see:
+
+- All project files
+- Folder structure
+- File types (tsx, css, json, etc.)
+
+### Viewing Files
+
+Click any file to view its contents:
+
+- Syntax highlighting
+- Line numbers
+- Code formatting
+
+## File Structure
+
+A typical Kleap app follows Next.js conventions:
+
+```
+├── app/                  # Pages and routes
+│   ├── page.tsx         # Homepage
+│   ├── layout.tsx       # Root layout
+│   └── [routes]/        # Other pages
+├── components/          # Reusable components
+│   ├── ui/             # UI primitives (shadcn)
+│   └── [custom]/       # Your components
+├── lib/                 # Utilities
+├── public/              # Static assets
+├── styles/              # Global styles
+└── package.json         # Dependencies
+```
+
+## Understanding the Code
+
+### Technologies Used
+
+| Technology | Purpose |
+|------------|---------|
+| **Next.js 15** | React framework, routing |
+| **TypeScript** | Type-safe JavaScript |
+| **Tailwind CSS** | Utility-first styling |
+| **shadcn/ui** | UI component library |
+
+### Key Files
+
+- `app/page.tsx` - Your homepage
+- `app/layout.tsx` - Root layout (header, footer)
+- `components/` - Your custom components
+- `tailwind.config.ts` - Styling configuration
+
+## Editing Code
+
+<Warning>
+  Direct code editing is for advanced users. For most changes, use the AI chat instead.
+</Warning>
+
+### When to Edit Directly
+
+- Fixing typos in text
+- Minor CSS adjustments
+- Understanding how something works
+- Debugging issues
+
+### How to Edit
+
+1. Open the file in the editor
+2. Make your changes
+3. Save (Ctrl/Cmd + S)
+4. Preview updates automatically
+
+## Working with AI
+
+The AI can reference specific files:
+
+```
+Look at app/page.tsx and move the hero section
+above the features section
+```
+
+```
+In components/Header.tsx, change the logo size
+```
+
+```
+Update the color scheme in tailwind.config.ts
+```
+
+## Exporting Code
+
+### Push to GitHub
+
+1. Go to **Settings** > **GitHub**
+2. Connect your GitHub account
+3. Create or connect a repository
+4. Push your code
+
+### Download Files
+
+1. Go to **Settings** > **Export**
+2. Click **Download ZIP**
+3. Get all source files locally
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Let AI handle complex changes">
+    For anything beyond simple text edits, describe what you want in chat. AI understands the full context.
+  </Accordion>
+
+  <Accordion title="Use version history">
+    If you break something, use [version history](/features/version-history) to roll back.
+  </Accordion>
+
+  <Accordion title="Learn the patterns">
+    Review AI-generated code to learn Next.js and React patterns.
+  </Accordion>
+</AccordionGroup>
+
+## Code Quality
+
+AI-generated code follows best practices:
+
+- TypeScript for type safety
+- Component-based architecture
+- Responsive design patterns
+- Accessibility standards
+- Performance optimization
+
+<Card title="Export to GitHub" icon="github" href="/integrations/github">
+  Push your code to version control
+</Card>

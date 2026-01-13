@@ -1,0 +1,308 @@
+---
+title: "Custom Fonts"
+description: "Add custom typography to your app"
+---
+
+# Custom Fonts
+
+Customize your app's typography with custom fonts.
+
+## Google Fonts
+
+The easiest way to add fonts:
+
+```
+"Change the heading font to Inter and body font to Roboto
+using Google Fonts"
+```
+
+### Implementation
+
+```typescript
+// app/layout.tsx
+import { Inter, Roboto } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
+
+const roboto = Roboto({
+  weight: ['400', '500', '700'],
+  subsets: ['latin'],
+  variable: '--font-roboto',
+});
+
+export default function RootLayout({ children }) {
+  return (
+    <html className={`${inter.variable} ${roboto.variable}`}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+### Using in Tailwind
+
+```typescript
+// tailwind.config.ts
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+        heading: ['var(--font-roboto)'],
+      },
+    },
+  },
+};
+```
+
+Then use in components:
+
+```typescript
+<h1 className="font-heading">Heading</h1>
+<p className="font-sans">Body text</p>
+```
+
+## Popular Font Combinations
+
+### Modern & Clean
+
+```
+Headings: Inter
+Body: Inter
+```
+
+### Professional
+
+```
+Headings: Poppins
+Body: Open Sans
+```
+
+### Creative
+
+```
+Headings: Playfair Display
+Body: Lato
+```
+
+### Tech/Startup
+
+```
+Headings: Space Grotesk
+Body: DM Sans
+```
+
+## Local Fonts
+
+For fonts not on Google Fonts:
+
+### Add Font Files
+
+Place in `public/fonts/`:
+
+```
+public/
+  fonts/
+    MyFont-Regular.woff2
+    MyFont-Bold.woff2
+```
+
+### Configure
+
+```typescript
+// app/layout.tsx
+import localFont from 'next/font/local';
+
+const myFont = localFont({
+  src: [
+    {
+      path: '../public/fonts/MyFont-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/MyFont-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-myfont',
+});
+```
+
+## Font Weights
+
+Common weight names:
+
+| Weight | Name |
+|--------|------|
+| 100 | Thin |
+| 200 | Extra Light |
+| 300 | Light |
+| 400 | Regular |
+| 500 | Medium |
+| 600 | Semi Bold |
+| 700 | Bold |
+| 800 | Extra Bold |
+| 900 | Black |
+
+### Loading Specific Weights
+
+Only load what you need for better performance:
+
+```typescript
+const inter = Inter({
+  weight: ['400', '600', '700'], // Only these weights
+  subsets: ['latin'],
+});
+```
+
+## Font Performance
+
+### Optimization Tips
+
+1. **Load only needed weights** - Don't load all weights
+2. **Limit font families** - 2-3 max
+3. **Use font-display: swap** - Shows fallback while loading
+4. **Subset fonts** - Only latin if that's all you need
+
+### Next.js Font Optimization
+
+Next.js automatically:
+
+- Self-hosts fonts (no external requests)
+- Preloads fonts
+- Eliminates layout shift
+- Optimizes loading
+
+## Typography Scale
+
+### Consistent Sizing
+
+Use Tailwind's typography scale:
+
+| Class | Size |
+|-------|------|
+| `text-xs` | 12px |
+| `text-sm` | 14px |
+| `text-base` | 16px |
+| `text-lg` | 18px |
+| `text-xl` | 20px |
+| `text-2xl` | 24px |
+| `text-3xl` | 30px |
+| `text-4xl` | 36px |
+| `text-5xl` | 48px |
+
+### Custom Scale
+
+```typescript
+// tailwind.config.ts
+module.exports = {
+  theme: {
+    extend: {
+      fontSize: {
+        'hero': ['4.5rem', { lineHeight: '1.1' }],
+        'subtitle': ['1.25rem', { lineHeight: '1.6' }],
+      },
+    },
+  },
+};
+```
+
+## Line Height & Spacing
+
+### Line Height
+
+```typescript
+<p className="leading-relaxed">Comfortable reading</p>
+<p className="leading-tight">Compact text</p>
+```
+
+### Letter Spacing
+
+```typescript
+<h1 className="tracking-tight">Tight headings</h1>
+<span className="tracking-wide uppercase">Labels</span>
+```
+
+## Common Font Tasks
+
+### Change All Fonts
+
+```
+"Change the app's primary font to Poppins for headings
+and Inter for body text"
+```
+
+### Consistent Typography
+
+```
+"Create a consistent typography system with h1-h6 styles,
+body text, and small text"
+```
+
+### Brand Font
+
+```
+"I have a brand font file (BrandFont.woff2). Add it as
+the primary heading font."
+```
+
+## Font Fallbacks
+
+Always specify fallbacks:
+
+```typescript
+fontFamily: {
+  sans: ['Inter', 'system-ui', 'sans-serif'],
+  serif: ['Georgia', 'serif'],
+  mono: ['Fira Code', 'monospace'],
+}
+```
+
+## Variable Fonts
+
+Modern fonts with adjustable properties:
+
+```typescript
+const inter = Inter({
+  subsets: ['latin'],
+  // Variable font - all weights included
+  display: 'swap',
+});
+```
+
+Benefits:
+- Smaller file size
+- All weights in one file
+- Smooth weight transitions
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Font not loading">
+    - Check font name spelling
+    - Verify weight exists for that font
+    - Check browser console for errors
+    - Ensure font is properly configured in layout
+  </Accordion>
+
+  <Accordion title="Flash of unstyled text">
+    - Next.js font optimization should handle this
+    - Check font-display is set to 'swap'
+    - Ensure fonts are loading with Next.js font system
+  </Accordion>
+
+  <Accordion title="Font looks different than expected">
+    - Verify you loaded the correct weight
+    - Check CSS isn't overriding font settings
+    - Ensure variable is applied to html/body
+  </Accordion>
+</AccordionGroup>
+
+<Card title="Styling Best Practices" icon="paintbrush" href="/tips/best-practices">
+  More design tips
+</Card>

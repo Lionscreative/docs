@@ -1,0 +1,163 @@
+---
+title: "Custom Domains"
+description: "Connect your own domain to your published app"
+---
+
+# Custom Domains
+
+Give your app a professional identity by connecting your own domain.
+
+## Domain Options
+
+### Vercel Subdomain (Free)
+
+Every published app gets a free URL:
+
+```
+https://your-app-name.vercel.app
+```
+
+### Custom Domain
+
+Connect your own domain:
+
+```
+https://myapp.com
+https://app.mycompany.com
+```
+
+## Setting Up a Custom Domain
+
+### Step 1: Get a Domain
+
+If you don't have a domain, purchase one from:
+
+- [Namecheap](https://namecheap.com)
+- [Google Domains](https://domains.google)
+- [Cloudflare](https://cloudflare.com)
+- [GoDaddy](https://godaddy.com)
+
+### Step 2: Add Domain in Kleap
+
+1. Go to **Settings** > **Domain**
+2. Click **Add Custom Domain**
+3. Enter your domain (e.g., `myapp.com`)
+4. Copy the DNS records shown
+
+### Step 3: Configure DNS
+
+Add these records at your domain registrar:
+
+<Tabs>
+  <Tab title="Root Domain (myapp.com)">
+    | Type | Name | Value |
+    |------|------|-------|
+    | A | @ | 76.76.21.21 |
+    | AAAA | @ | 2606:4700:90:0:... |
+  </Tab>
+  <Tab title="Subdomain (app.myapp.com)">
+    | Type | Name | Value |
+    |------|------|-------|
+    | CNAME | app | cname.vercel-dns.com |
+  </Tab>
+</Tabs>
+
+### Step 4: Verify
+
+1. Return to Kleap settings
+2. Click **Verify Domain**
+3. Wait for DNS propagation (up to 48 hours)
+
+<Info>
+  DNS changes typically take 15 minutes to 48 hours to propagate worldwide.
+</Info>
+
+## SSL Certificates
+
+Vercel automatically provisions and renews SSL certificates:
+
+- **Free SSL** - Included with all domains
+- **Auto-renewal** - Certificates renew automatically
+- **HTTPS enforced** - HTTP redirects to HTTPS
+
+## Multiple Domains
+
+You can connect multiple domains to one app:
+
+- `myapp.com` (primary)
+- `www.myapp.com` (redirect)
+- `app.mycompany.com` (alias)
+
+### Setting Primary Domain
+
+1. Go to domain settings
+2. Click the domain to set as primary
+3. Other domains redirect to primary
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Domain not verifying">
+    - Double-check DNS records are correct
+    - Wait up to 48 hours for propagation
+    - Use [DNS Checker](https://dnschecker.org) to verify
+    - Ensure no conflicting records exist
+  </Accordion>
+
+  <Accordion title="SSL certificate not issued">
+    - Domain must be verified first
+    - Check for CAA records blocking issuance
+    - Wait 15 minutes after verification
+  </Accordion>
+
+  <Accordion title="www not working">
+    Add both records:
+    - `myapp.com` → A record
+    - `www.myapp.com` → CNAME to `cname.vercel-dns.com`
+  </Accordion>
+
+  <Accordion title="Redirect loop">
+    - Disable any proxy (Cloudflare orange cloud)
+    - Or set Cloudflare SSL to "Full (strict)"
+  </Accordion>
+</AccordionGroup>
+
+## Domain with Cloudflare
+
+If using Cloudflare DNS:
+
+1. Add CNAME record
+2. Set proxy status to **DNS only** (gray cloud)
+3. Or keep proxied and set SSL to **Full (strict)**
+
+<Warning>
+  If using Cloudflare proxy, ensure SSL mode is "Full (strict)" to avoid redirect loops.
+</Warning>
+
+## Removing a Domain
+
+1. Go to **Settings** > **Domain**
+2. Click the domain to remove
+3. Confirm removal
+4. Update or remove DNS records at registrar
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Use subdomains for apps" icon="sitemap">
+    Keep `mycompany.com` for your main site, use `app.mycompany.com` for the Kleap app.
+  </Card>
+  <Card title="Set up www redirect" icon="arrow-right">
+    Always redirect www to non-www (or vice versa) for consistency.
+  </Card>
+  <Card title="Monitor expiration" icon="calendar">
+    Set reminders for domain renewal to avoid losing your URL.
+  </Card>
+  <Card title="Use reputable registrars" icon="shield">
+    Choose registrars with good security and support.
+  </Card>
+</CardGroup>
+
+<Card title="Publish Your App First" icon="rocket" href="/features/publishing">
+  You need a published app before adding a custom domain
+</Card>

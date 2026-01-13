@@ -1,0 +1,293 @@
+---
+title: "Stripe"
+description: "Accept payments and manage subscriptions"
+---
+
+# Stripe Integration
+
+Add payment processing to your Kleap app using Stripe.
+
+## What is Stripe?
+
+Stripe is a payment platform for:
+
+- **One-time payments** - Charge for products or services
+- **Subscriptions** - Recurring billing
+- **Checkout** - Pre-built payment pages
+- **Invoicing** - Send and manage invoices
+
+## Getting Started
+
+### Use a Payment Template
+
+The easiest way to add payments is starting with a template:
+
+1. Create new app
+2. Choose **SaaS Template** or similar
+3. Stripe integration is pre-configured
+4. Connect your Stripe account
+
+### Add Payments to Existing App
+
+Ask Kleap to add Stripe:
+
+```
+Add Stripe payment integration with checkout for a $29/month subscription
+```
+
+## Connecting Stripe
+
+### Create Stripe Account
+
+1. Go to [stripe.com](https://stripe.com)
+2. Sign up for an account
+3. Complete business verification
+
+### Get API Keys
+
+1. Go to Stripe Dashboard → Developers → API keys
+2. Copy your keys:
+   - **Publishable key** (`pk_test_...` or `pk_live_...`)
+   - **Secret key** (`sk_test_...` or `sk_live_...`)
+
+### Add to Kleap
+
+1. Go to **Settings** > **Environment**
+2. Add variables:
+   ```
+   STRIPE_PUBLISHABLE_KEY=pk_test_...
+   STRIPE_SECRET_KEY=sk_test_...
+   ```
+
+<Warning>
+  Never expose your secret key in client-side code. Only use it in API routes.
+</Warning>
+
+## Test vs Live Mode
+
+| Mode | Keys | Use |
+|------|------|-----|
+| **Test** | `pk_test_`, `sk_test_` | Development, testing |
+| **Live** | `pk_live_`, `sk_live_` | Real payments |
+
+### Test Card Numbers
+
+Use these in test mode:
+
+| Card Number | Result |
+|-------------|--------|
+| `4242 4242 4242 4242` | Success |
+| `4000 0000 0000 0002` | Declined |
+| `4000 0000 0000 3220` | Requires 3D Secure |
+
+## Common Payment Flows
+
+### Stripe Checkout
+
+Pre-built, hosted payment page:
+
+```typescript
+// API route to create checkout session
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+export async function POST(request: Request) {
+  const session = await stripe.checkout.sessions.create({
+    mode: 'subscription',
+    payment_method_types: ['card'],
+    line_items: [{
+      price: 'price_xxx', // Your Stripe price ID
+      quantity: 1,
+    }],
+    success_url: `${origin}/success`,
+    cancel_url: `${origin}/canceled`,
+  });
+
+  return Response.json({ url: session.url });
+}
+```
+
+### Subscription Management
+
+Handle subscription lifecycle:
+
+```typescript
+// Create customer portal session
+const portalSession = await stripe.billingPortal.sessions.create({
+  customer: customerId,
+  return_url: `${origin}/account`,
+});
+```
+
+## Products and Prices
+
+### Create in Stripe Dashboard
+
+1. Go to Products → Add product
+2. Set name, description
+3. Add pricing (one-time or recurring)
+4. Copy the Price ID
+
+### Use Price ID in Code
+
+```typescript
+const session = await stripe.checkout.sessions.create({
+  line_items: [{
+    price: 'price_1234567890', // Your price ID
+    quantity: 1,
+  }],
+  // ...
+});
+```
+
+## Webhooks
+
+Handle Stripe events in your app:
+
+### Set Up Webhook
+
+1. In Stripe Dashboard → Webhooks → Add endpoint
+2. Enter your endpoint URL: `https://yourapp.com/api/stripe/webhook`
+3. Select events to listen for
+4. Copy the webhook signing secret
+
+### Handle Events
+
+```typescript
+// app/api/stripe/webhook/route.ts
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+export async function POST(request: Request) {
+  const body = await request.text();
+  const signature = request.headers.get('stripe-signature')!;
+
+  const event = stripe.webhooks.constructEvent(
+    body,
+    signature,
+    process.env.STRIPE_WEBHOOK_SECRET!
+  );
+
+  switch (event.type) {
+    case 'checkout.session.completed':
+      // Handle successful payment
+      break;
+    case 'customer.subscription.deleted':
+      // Handle cancellation
+      break;
+  }
+
+  return new Response('OK');
+}
+```
+
+### Important Events
+
+| Event | When |
+|-------|------|
+| `checkout.session.completed` | Payment successful |
+| `customer.subscription.created` | New subscription |
+| `customer.subscription.updated` | Plan changed |
+| `customer.subscription.deleted` | Subscription canceled |
+| `invoice.paid` | Invoice payment successful |
+| `invoice.payment_failed` | Payment failed |
+
+## Pricing Strategies
+
+### One-Time Payment
+
+Best for:
+- Digital products
+- Templates
+- Lifetime access
+
+### Monthly Subscription
+
+Best for:
+- SaaS products
+- Ongoing services
+- Content access
+
+### Tiered Pricing
+
+```
+Free: $0/mo - Basic features
+Pro: $19/mo - Advanced features
+Enterprise: $99/mo - Everything
+```
+
+## Going Live
+
+Before accepting real payments:
+
+<Steps>
+  <Step title="Complete Stripe verification">
+    Verify your business identity in Stripe Dashboard
+  </Step>
+  <Step title="Switch to live keys">
+    Replace test keys with live keys in environment variables
+  </Step>
+  <Step title="Test the flow">
+    Make a real test purchase (refund afterward)
+  </Step>
+  <Step title="Set up webhooks for production">
+    Create live webhook endpoint
+  </Step>
+</Steps>
+
+## Stripe Fees
+
+| Type | Fee |
+|------|-----|
+| Card payments | 2.9% + $0.30 |
+| International | +1.5% |
+| Currency conversion | +1% |
+| Disputes | $15 |
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Always use webhooks">
+    Don't rely on redirect success URLs alone. Webhooks ensure you capture all events.
+  </Accordion>
+
+  <Accordion title="Store customer IDs">
+    Save Stripe customer IDs in your database to manage subscriptions.
+  </Accordion>
+
+  <Accordion title="Handle failed payments">
+    Implement dunning emails and grace periods for failed subscription payments.
+  </Accordion>
+
+  <Accordion title="Test thoroughly">
+    Test every payment flow in test mode before going live.
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Webhook signature verification failed">
+    - Ensure you're using the correct webhook secret
+    - Check the raw body isn't being parsed before verification
+    - Verify the webhook URL matches exactly
+  </Accordion>
+
+  <Accordion title="Payment declined">
+    - Check if using test cards in live mode (or vice versa)
+    - Verify the card details are correct
+    - Check for Radar (fraud) blocks in Stripe Dashboard
+  </Accordion>
+
+  <Accordion title="Subscription not updating">
+    - Check webhook events are being received
+    - Verify your webhook handler processes the events
+    - Check database updates are working
+  </Accordion>
+</AccordionGroup>
+
+<Card title="SaaS Dashboard Tutorial" icon="gauge" href="/use-cases/saas-dashboard">
+  Build a complete SaaS with Stripe billing
+</Card>

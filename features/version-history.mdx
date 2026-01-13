@@ -1,0 +1,110 @@
+---
+title: "Version History"
+description: "Track changes and roll back to previous versions"
+---
+
+# Version History
+
+Every change to your app is tracked. You can view history and restore any previous version.
+
+## How It Works
+
+Kleap automatically saves a version when:
+
+- You make changes via AI chat
+- You edit files directly
+- You publish to Vercel
+
+## Viewing History
+
+### Access Version History
+
+1. Click **History** in the top toolbar
+2. Or go to **Settings** > **Version History**
+
+### What You'll See
+
+- **Timestamp** - When the change was made
+- **Description** - What changed (from chat message)
+- **Files changed** - Which files were modified
+
+## Restoring Versions
+
+### Roll Back to a Version
+
+1. Find the version in history
+2. Click **Restore this version**
+3. Confirm the rollback
+4. Your app reverts to that state
+
+<Warning>
+  Restoring a version creates a new version with the old code. Your current work is preserved in history.
+</Warning>
+
+### Preview Before Restoring
+
+Click on any version to preview what your app looked like at that point.
+
+## Use Cases
+
+### Undo a Bad Change
+
+Made a change that broke something?
+
+1. Open version history
+2. Find the version before the change
+3. Restore it
+4. Try again with a different approach
+
+### Compare Changes
+
+See what changed between versions:
+
+1. Select two versions
+2. View the diff (file differences)
+3. Understand what was modified
+
+### Recover Lost Work
+
+Accidentally deleted a component?
+
+1. Find when it existed in history
+2. Restore that version
+3. Or copy just the parts you need
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Make meaningful changes">
+    Send clear, specific messages so version descriptions are useful.
+  </Accordion>
+
+  <Accordion title="Check history before major changes">
+    Before big refactors, note your current version in case you need to roll back.
+  </Accordion>
+
+  <Accordion title="Don't rely solely on history">
+    For important milestones, also push to GitHub for permanent backup.
+  </Accordion>
+</AccordionGroup>
+
+## Version Limits
+
+| Plan | Version History |
+|------|-----------------|
+| Free | Last 50 versions |
+| Pro | Last 200 versions |
+| Business | Unlimited |
+
+## Git Integration
+
+For complete version control:
+
+1. Connect GitHub in settings
+2. Push your code
+3. Use Git branches for experiments
+4. Full history on GitHub forever
+
+<Card title="Connect GitHub" icon="github" href="/integrations/github">
+  Set up Git version control
+</Card>

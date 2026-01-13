@@ -1,0 +1,158 @@
+---
+title: "Element Selection"
+description: "Click on any element to select and edit it"
+---
+
+# Element Selection
+
+Element selection lets you click on any part of your app to select it, then make changes through the AI chat.
+
+## How It Works
+
+1. **Click** on any element in the preview
+2. The element gets **highlighted** with a blue border
+3. The AI knows **what you selected**
+4. **Ask for changes** - "Make this bigger", "Change the color"
+
+## Selecting Elements
+
+### Single Element
+
+Click directly on the element you want to modify:
+
+- Text blocks
+- Buttons
+- Images
+- Containers
+- Forms
+- Navigation items
+
+### Visual Feedback
+
+When selected:
+
+- **Blue border** shows the selected element
+- **Element info** appears (tag, class)
+- The AI references this element in responses
+
+## Making Changes
+
+Once selected, describe your change:
+
+### Styling
+
+```
+Make this text larger
+```
+
+```
+Change the background color to blue
+```
+
+```
+Add more padding around this section
+```
+
+### Content
+
+```
+Change this heading to "Welcome to My App"
+```
+
+```
+Replace this image with a placeholder
+```
+
+### Layout
+
+```
+Center this content
+```
+
+```
+Make this a 3-column grid
+```
+
+### Functionality
+
+```
+Make this button open a modal
+```
+
+```
+Add a click animation to this card
+```
+
+## Examples
+
+<Tabs>
+  <Tab title="Change Button">
+    1. Click the button in preview
+    2. Type: "Make this button green with white text"
+    3. AI updates the button styling
+  </Tab>
+  <Tab title="Edit Section">
+    1. Click anywhere in a section
+    2. Type: "Add a gradient background to this section"
+    3. AI applies the gradient
+  </Tab>
+  <Tab title="Modify Card">
+    1. Click on a card component
+    2. Type: "Add a shadow and round the corners more"
+    3. AI updates the card styles
+  </Tab>
+</Tabs>
+
+## Tips for Better Selection
+
+<AccordionGroup>
+  <Accordion title="Be precise with clicks">
+    Click directly on the element you want. If you hit a parent container, try clicking closer to the content.
+  </Accordion>
+
+  <Accordion title="Use descriptions when selection is tricky">
+    If clicking doesn't select the right element:
+    ```
+    The third button in the navigation bar
+    ```
+    ```
+    The hero section heading
+    ```
+  </Accordion>
+
+  <Accordion title="Reference multiple elements">
+    You can describe multiple elements:
+    ```
+    Make all buttons in this section rounded
+    ```
+    ```
+    Change the color of all headings to blue
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Limitations
+
+- Some deeply nested elements may be harder to select
+- Dynamic elements (modals, dropdowns) need to be visible to select
+- For complex selections, describe the element in chat
+
+## Without Selection
+
+You can still make changes without selection by being descriptive:
+
+```
+Change the main heading on the homepage to "Welcome"
+```
+
+```
+Update the footer background to dark gray
+```
+
+```
+Make all buttons have rounded corners
+```
+
+<Card title="Learn Effective Prompting" icon="lightbulb" href="/prompting/overview">
+  Get better at describing changes
+</Card>

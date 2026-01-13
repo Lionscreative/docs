@@ -1,0 +1,178 @@
+---
+title: "Collaboration"
+description: "Work together with your team on apps"
+---
+
+# Collaboration
+
+Build apps together with team members using Kleap's collaboration features.
+
+## Team Features
+
+- **Shared apps** - Multiple people can work on the same app
+- **Role management** - Control who can do what
+- **App transfer** - Move apps between accounts
+- **Team billing** - Centralized credit management
+
+## Inviting Team Members
+
+### Add to an App
+
+1. Open your app
+2. Go to **Settings** > **Team**
+3. Click **Invite Member**
+4. Enter their email address
+5. Select their role
+6. Send invitation
+
+### Invitation Flow
+
+1. Team member receives email
+2. They click the invite link
+3. Sign up or log in to Kleap
+4. Access is granted automatically
+
+<Info>
+  Team members need their own Kleap account to collaborate.
+</Info>
+
+## Roles & Permissions
+
+| Role | View | Edit | Deploy | Settings | Billing |
+|------|------|------|--------|----------|---------|
+| **Viewer** | ✓ | - | - | - | - |
+| **Editor** | ✓ | ✓ | - | - | - |
+| **Developer** | ✓ | ✓ | ✓ | - | - |
+| **Admin** | ✓ | ✓ | ✓ | ✓ | - |
+| **Owner** | ✓ | ✓ | ✓ | ✓ | ✓ |
+
+### Role Details
+
+<AccordionGroup>
+  <Accordion title="Viewer">
+    Can view the app, code, and preview. Cannot make changes.
+  </Accordion>
+
+  <Accordion title="Editor">
+    Can edit the app using AI chat and code editor. Cannot deploy.
+  </Accordion>
+
+  <Accordion title="Developer">
+    Can edit and deploy to production. Cannot change settings.
+  </Accordion>
+
+  <Accordion title="Admin">
+    Full access except billing and ownership transfer.
+  </Accordion>
+
+  <Accordion title="Owner">
+    Complete control including billing, deletion, and transfer.
+  </Accordion>
+</AccordionGroup>
+
+## Managing Team Members
+
+### Change Role
+
+1. Go to **Settings** > **Team**
+2. Find the team member
+3. Click their role dropdown
+4. Select new role
+
+### Remove Member
+
+1. Go to **Settings** > **Team**
+2. Find the team member
+3. Click **Remove**
+4. Confirm removal
+
+<Warning>
+  Removed members lose access immediately but their previous edits remain.
+</Warning>
+
+## App Transfer
+
+Transfer app ownership to another user.
+
+### Transfer to Team Member
+
+1. Go to **Settings** > **Transfer**
+2. Select the recipient (must be a team member)
+3. Confirm transfer
+4. Recipient accepts the transfer
+
+### Transfer to Any User
+
+1. Go to **Settings** > **Transfer**
+2. Enter recipient's email
+3. They receive a transfer request
+4. They accept and become the new owner
+
+<Info>
+  After transfer, you become an Admin unless removed by the new owner.
+</Info>
+
+## Working Together
+
+### Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Communicate changes" icon="comments">
+    Let team members know when you're making big changes.
+  </Card>
+  <Card title="Use version history" icon="clock-rotate-left">
+    Check history to see what others have changed.
+  </Card>
+  <Card title="Assign clear roles" icon="user-tag">
+    Give appropriate permissions for each person's job.
+  </Card>
+  <Card title="Review before deploy" icon="eye">
+    Have someone review changes before publishing.
+  </Card>
+</CardGroup>
+
+### Avoiding Conflicts
+
+Currently, Kleap doesn't have real-time collaboration (like Google Docs). To avoid conflicts:
+
+1. **Communicate** when you're working on the app
+2. **Work on different parts** at the same time
+3. **Refresh** before starting to get latest changes
+4. **Use version history** to recover if needed
+
+## Team Billing
+
+### Credit Usage
+
+- Each edit uses credits from the **app owner's** account
+- Team members don't need their own credits to edit
+- Owner can view credit usage per team member
+
+### Pro Team Features
+
+On Pro and Business plans:
+
+- More team members allowed
+- Priority support for all members
+- Advanced role permissions
+
+## Limits
+
+| Plan | Team Members per App |
+|------|---------------------|
+| Free | 2 |
+| Pro | 10 |
+| Business | Unlimited |
+
+## Enterprise Features
+
+For larger teams, contact us about:
+
+- **SSO** - Single sign-on integration
+- **Audit logs** - Track all team activity
+- **Custom roles** - Define your own permissions
+- **Organization** - Manage multiple teams
+
+<Card title="Need more team features?" icon="building">
+  [Contact us](mailto:hello@kleap.co) about Business and Enterprise plans.
+</Card>

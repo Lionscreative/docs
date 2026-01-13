@@ -1,0 +1,276 @@
+---
+title: "Supabase"
+description: "Database, authentication, and storage for your apps"
+---
+
+# Supabase Integration
+
+Supabase provides the backend infrastructure for Kleap apps: database, auth, storage, and real-time features.
+
+## What is Supabase?
+
+Supabase is an open-source Firebase alternative offering:
+
+- **PostgreSQL Database** - Relational database with SQL
+- **Authentication** - User signup, login, OAuth
+- **Storage** - File uploads and media
+- **Real-time** - Live data subscriptions
+- **Edge Functions** - Serverless backend logic
+
+## Connecting Supabase
+
+### First-Time Setup
+
+1. Go to **Settings** > **Supabase**
+2. Click **Connect Supabase**
+3. Sign in to Supabase (or create account)
+4. Authorize Kleap
+5. Connection saved
+
+### Creating a Database
+
+After connecting:
+
+1. Go to **Settings** > **Database**
+2. Click **Create Database**
+3. Choose a region (closest to your users)
+4. Database created in ~60 seconds
+
+<Info>
+  Each app can have its own database, or multiple apps can share one.
+</Info>
+
+## Database Features
+
+### Tables
+
+Store your app's data in tables:
+
+```
+Example: Blog App
+- users (id, email, name, avatar)
+- posts (id, title, content, author_id, created_at)
+- comments (id, post_id, user_id, text)
+```
+
+### Creating Tables via AI
+
+Ask Kleap to create tables:
+
+```
+Create a database table for blog posts with title,
+content, author, and published date
+```
+
+The AI generates and applies the migration.
+
+### Row Level Security (RLS)
+
+Control data access at the database level:
+
+```sql
+-- Users can only read their own data
+CREATE POLICY "Users read own data"
+ON users FOR SELECT
+USING (auth.uid() = id);
+
+-- Users can only update their own posts
+CREATE POLICY "Authors update posts"
+ON posts FOR UPDATE
+USING (auth.uid() = author_id);
+```
+
+<Warning>
+  Always enable RLS on tables containing user data. This is critical for security.
+</Warning>
+
+## Authentication
+
+### Built-in Auth Methods
+
+- **Email/Password** - Traditional signup
+- **Magic Link** - Passwordless email login
+- **OAuth Providers** - Google, GitHub, etc.
+
+### Adding Auth via AI
+
+```
+Add user authentication with email signup and Google login
+```
+
+Kleap sets up:
+- Supabase Auth configuration
+- Login/signup pages
+- Protected routes
+- User session handling
+
+### Auth Code Example
+
+```typescript
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(url, key);
+
+// Sign up
+const { data, error } = await supabase.auth.signUp({
+  email: 'user@example.com',
+  password: 'securepassword'
+});
+
+// Sign in
+const { data, error } = await supabase.auth.signInWithPassword({
+  email: 'user@example.com',
+  password: 'securepassword'
+});
+
+// Get current user
+const { data: { user } } = await supabase.auth.getUser();
+
+// Sign out
+await supabase.auth.signOut();
+```
+
+## Storage
+
+### File Uploads
+
+Store images, documents, and media:
+
+```typescript
+// Upload file
+const { data, error } = await supabase.storage
+  .from('avatars')
+  .upload('public/avatar.png', file);
+
+// Get public URL
+const { data } = supabase.storage
+  .from('avatars')
+  .getPublicUrl('public/avatar.png');
+```
+
+### Storage Buckets
+
+Organize files in buckets:
+
+| Bucket | Access | Use Case |
+|--------|--------|----------|
+| **public** | Anyone | Public images, assets |
+| **private** | Authenticated | User uploads |
+| **avatars** | Per-user | Profile pictures |
+
+## Real-time Subscriptions
+
+Get live updates when data changes:
+
+```typescript
+// Subscribe to changes
+const subscription = supabase
+  .channel('posts')
+  .on('postgres_changes', {
+    event: '*',
+    schema: 'public',
+    table: 'posts'
+  }, (payload) => {
+    console.log('Change:', payload);
+  })
+  .subscribe();
+```
+
+Use cases:
+- Live chat
+- Real-time dashboards
+- Collaborative editing
+- Notifications
+
+## Edge Functions
+
+Run server-side code:
+
+```typescript
+// supabase/functions/hello/index.ts
+Deno.serve(async (req) => {
+  const { name } = await req.json();
+  return new Response(
+    JSON.stringify({ message: `Hello ${name}!` }),
+    { headers: { 'Content-Type': 'application/json' } }
+  );
+});
+```
+
+## Database Management
+
+### Via Kleap
+
+Ask the AI to make database changes:
+
+```
+Add a "likes" column to the posts table
+```
+
+```
+Create a table for storing user notifications
+```
+
+### Via Supabase Dashboard
+
+1. Go to [supabase.com/dashboard](https://supabase.com/dashboard)
+2. Select your project
+3. Use Table Editor, SQL Editor, or Auth settings
+
+## Supabase Pricing
+
+| Plan | Database | Storage | Auth | Price |
+|------|----------|---------|------|-------|
+| **Free** | 500 MB | 1 GB | 50K MAU | $0 |
+| **Pro** | 8 GB | 100 GB | 100K MAU | $25/mo |
+| **Team** | Unlimited | Unlimited | Unlimited | $599/mo |
+
+<Tip>
+  Free tier is generous for most apps. You can upgrade anytime as you grow.
+</Tip>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Enable RLS on all tables">
+    Row Level Security is your primary defense against data leaks.
+  </Accordion>
+
+  <Accordion title="Use proper data types">
+    Use appropriate PostgreSQL types: `uuid` for IDs, `timestamptz` for dates, `jsonb` for flexible data.
+  </Accordion>
+
+  <Accordion title="Index frequently queried columns">
+    Add indexes to columns used in WHERE clauses and JOINs for better performance.
+  </Accordion>
+
+  <Accordion title="Don't expose service key">
+    Only use the public `anon` key in client code. Keep the `service_role` key secret.
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Database connection failed">
+    - Check your Supabase project is active
+    - Verify environment variables are set
+    - Ensure project hasn't been paused (free tier pauses after inactivity)
+  </Accordion>
+
+  <Accordion title="Auth not working">
+    - Enable the auth provider in Supabase dashboard
+    - Check redirect URLs are configured
+    - Verify site URL is set correctly
+  </Accordion>
+
+  <Accordion title="RLS blocking access">
+    - Check your policies allow the intended operations
+    - Verify `auth.uid()` is correct for the logged-in user
+    - Test policies in Supabase SQL Editor
+  </Accordion>
+</AccordionGroup>
+
+<Card title="Security Best Practices" icon="shield-check" href="/features/security">
+  Learn how to secure your Supabase database
+</Card>

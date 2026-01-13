@@ -1,0 +1,219 @@
+---
+title: "Security"
+description: "Keep your app and data safe"
+---
+
+# Security
+
+Kleap includes security features to protect your app and users.
+
+## Pre-Build Security Checks
+
+Before deployment, Kleap automatically scans for:
+
+- **Exposed secrets** - API keys, passwords in code
+- **Hardcoded credentials** - Database URLs, tokens
+- **Security vulnerabilities** - Known package issues
+- **Unsafe patterns** - SQL injection, XSS risks
+
+<Warning>
+  Never commit API keys or passwords directly in your code. Use environment variables instead.
+</Warning>
+
+## Environment Variables
+
+Store sensitive data securely:
+
+### Adding Variables
+
+1. Go to **Settings** > **Environment**
+2. Click **Add Variable**
+3. Enter key and value
+4. Variables are encrypted at rest
+
+### Using Variables
+
+In your code, access via `process.env`:
+
+```typescript
+const apiKey = process.env.STRIPE_SECRET_KEY;
+```
+
+### Variable Scopes
+
+| Scope | Available In |
+|-------|--------------|
+| **Development** | Preview only |
+| **Production** | Published app only |
+| **All** | Both preview and production |
+
+## Secure Defaults
+
+Kleap apps include security best practices:
+
+- **HTTPS only** - All traffic encrypted
+- **Secure headers** - XSS protection, HSTS
+- **CORS configured** - Cross-origin protections
+- **CSP ready** - Content Security Policy support
+
+## Authentication Security
+
+When using Supabase Auth:
+
+- **Password hashing** - bcrypt with salt
+- **JWT tokens** - Secure session management
+- **Row Level Security** - Database-level access control
+- **OAuth support** - Google, GitHub, etc.
+
+### Best Practices
+
+<AccordionGroup>
+  <Accordion title="Enable RLS on all tables">
+    Row Level Security ensures users only access their own data.
+
+    ```sql
+    ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
+
+    CREATE POLICY "Users can view own posts"
+    ON posts FOR SELECT
+    USING (auth.uid() = user_id);
+    ```
+  </Accordion>
+
+  <Accordion title="Validate user input">
+    Never trust client-side data. Validate on the server.
+
+    ```typescript
+    // Good - server validation
+    if (!email || !email.includes('@')) {
+      throw new Error('Invalid email');
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Use parameterized queries">
+    Prevent SQL injection with prepared statements.
+
+    ```typescript
+    // Good - parameterized
+    const { data } = await supabase
+      .from('users')
+      .select()
+      .eq('id', userId);
+    ```
+  </Accordion>
+
+  <Accordion title="Implement rate limiting">
+    Protect APIs from abuse with rate limits.
+  </Accordion>
+</AccordionGroup>
+
+## Data Protection
+
+### Database Security
+
+Supabase provides:
+
+- **Encryption at rest** - AES-256
+- **Encryption in transit** - TLS 1.3
+- **Automatic backups** - Daily snapshots
+- **Point-in-time recovery** - Restore to any moment
+
+### File Storage Security
+
+For uploaded files:
+
+- **Signed URLs** - Time-limited access
+- **Bucket policies** - Control who can access
+- **Size limits** - Prevent abuse
+
+## API Security
+
+### Protecting API Routes
+
+```typescript
+// Verify authentication
+export async function POST(request: Request) {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+
+  // Process request...
+}
+```
+
+### Rate Limiting
+
+Consider adding rate limiting for:
+
+- Login attempts
+- API endpoints
+- Form submissions
+- File uploads
+
+## Common Vulnerabilities
+
+### What Kleap Helps Prevent
+
+| Vulnerability | Protection |
+|--------------|------------|
+| **XSS** | React auto-escapes, secure headers |
+| **CSRF** | SameSite cookies, token validation |
+| **SQL Injection** | Parameterized queries via Supabase |
+| **Exposed Secrets** | Pre-build scanning |
+| **Insecure Transport** | HTTPS enforced |
+
+### What You Should Check
+
+- **Broken Access Control** - Verify authorization on all routes
+- **Sensitive Data Exposure** - Don't log sensitive info
+- **Security Misconfiguration** - Review default settings
+- **Using Components with Vulnerabilities** - Keep packages updated
+
+## Security Checklist
+
+Before launching, verify:
+
+<Steps>
+  <Step title="Environment Variables">
+    All secrets stored in environment variables, not code
+  </Step>
+  <Step title="Authentication">
+    User auth properly implemented with Supabase
+  </Step>
+  <Step title="Authorization">
+    RLS policies on all database tables
+  </Step>
+  <Step title="Input Validation">
+    All user input validated server-side
+  </Step>
+  <Step title="HTTPS">
+    Custom domain has SSL certificate
+  </Step>
+  <Step title="Dependencies">
+    No known vulnerabilities in packages
+  </Step>
+</Steps>
+
+## Reporting Vulnerabilities
+
+Found a security issue? Contact us:
+
+- Email: security@kleap.co
+- We'll respond within 24 hours
+- Responsible disclosure appreciated
+
+## Compliance
+
+Kleap infrastructure supports:
+
+- **GDPR** - EU data protection
+- **SOC 2** - Via Vercel and Supabase
+- **HIPAA** - Available on Business plans (contact us)
+
+<Card title="Security Tips" icon="shield-check" href="/tips/security-tips">
+  Detailed guide to avoiding security pitfalls
+</Card>

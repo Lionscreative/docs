@@ -1,0 +1,284 @@
+---
+title: "Security Tips"
+description: "Keep your app and user data safe"
+---
+
+# Security Tips
+
+Best practices for building secure applications with Kleap.
+
+## The Golden Rules
+
+<CardGroup cols={2}>
+  <Card title="Never trust client input" icon="shield-halved">
+    Always validate data on the server
+  </Card>
+  <Card title="Keep secrets secret" icon="key">
+    Use environment variables for API keys
+  </Card>
+  <Card title="Least privilege" icon="lock">
+    Only give access to what's needed
+  </Card>
+  <Card title="Defense in depth" icon="layer-group">
+    Multiple layers of protection
+  </Card>
+</CardGroup>
+
+## Protecting Secrets
+
+### Environment Variables
+
+Never hardcode secrets in your code:
+
+```typescript
+// ❌ Bad - exposed in client bundle
+const apiKey = "sk_live_abc123";
+
+// ✅ Good - server-side only
+const apiKey = process.env.STRIPE_SECRET_KEY;
+```
+
+### Setting Environment Variables
+
+1. Go to **Settings** > **Environment**
+2. Add your secrets
+3. Set appropriate scope (dev/prod)
+
+### What Goes in Environment Variables
+
+- API keys (Stripe, SendGrid, etc.)
+- Database credentials
+- OAuth secrets
+- Encryption keys
+- Third-party service tokens
+
+## Database Security
+
+### Always Enable RLS
+
+Row Level Security is your primary defense:
+
+```sql
+-- Enable RLS on table
+ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
+
+-- Users can only see their own posts
+CREATE POLICY "Users read own posts"
+ON posts FOR SELECT
+USING (auth.uid() = user_id);
+
+-- Users can only modify their own posts
+CREATE POLICY "Users modify own posts"
+ON posts FOR ALL
+USING (auth.uid() = user_id);
+```
+
+### Common RLS Patterns
+
+```sql
+-- Public read, owner write
+CREATE POLICY "Public read"
+ON posts FOR SELECT USING (true);
+
+CREATE POLICY "Owner write"
+ON posts FOR INSERT
+WITH CHECK (auth.uid() = user_id);
+
+-- Team-based access
+CREATE POLICY "Team members"
+ON documents FOR ALL
+USING (team_id IN (
+  SELECT team_id FROM team_members
+  WHERE user_id = auth.uid()
+));
+```
+
+### Check Your Policies
+
+Ask AI to review:
+
+```
+Can you check the RLS policies on my tables and make sure
+users can only access their own data?
+```
+
+## Input Validation
+
+### Validate on Server
+
+Never trust client-side validation alone:
+
+```typescript
+// API route validation
+export async function POST(request: Request) {
+  const { email, message } = await request.json();
+
+  // Validate
+  if (!email || !email.includes('@')) {
+    return Response.json({ error: 'Invalid email' }, { status: 400 });
+  }
+
+  if (!message || message.length > 1000) {
+    return Response.json({ error: 'Invalid message' }, { status: 400 });
+  }
+
+  // Process...
+}
+```
+
+### Use Zod for Validation
+
+```typescript
+import { z } from 'zod';
+
+const contactSchema = z.object({
+  email: z.string().email(),
+  message: z.string().min(1).max(1000),
+});
+
+export async function POST(request: Request) {
+  const body = await request.json();
+  const result = contactSchema.safeParse(body);
+
+  if (!result.success) {
+    return Response.json({ error: result.error }, { status: 400 });
+  }
+
+  // Process validated data
+  const { email, message } = result.data;
+}
+```
+
+## Authentication Security
+
+### Protect Routes
+
+Verify authentication on protected routes:
+
+```typescript
+import { createClient } from '@/lib/supabase/server';
+
+export async function GET() {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return Response.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  // Proceed with authenticated request
+}
+```
+
+### Session Management
+
+- Use Supabase's built-in session handling
+- Don't store sessions in localStorage for sensitive apps
+- Implement proper logout that clears all sessions
+
+## Preventing Common Attacks
+
+### XSS (Cross-Site Scripting)
+
+React automatically escapes content, but be careful with:
+
+```typescript
+// ❌ Dangerous - allows XSS
+<div dangerouslySetInnerHTML={{ __html: userInput }} />
+
+// ✅ Safe - auto-escaped
+<div>{userInput}</div>
+```
+
+### SQL Injection
+
+Supabase uses parameterized queries by default:
+
+```typescript
+// ✅ Safe - parameterized
+const { data } = await supabase
+  .from('posts')
+  .select()
+  .eq('user_id', userId);
+
+// ❌ Dangerous - never do this
+const { data } = await supabase.rpc('raw_query', {
+  query: `SELECT * FROM posts WHERE user_id = '${userId}'`
+});
+```
+
+### CSRF (Cross-Site Request Forgery)
+
+Next.js and Supabase handle most CSRF protection. Ensure:
+
+- Use SameSite cookies
+- Verify origin on sensitive actions
+- Use Supabase's built-in auth tokens
+
+## File Upload Security
+
+### Validate File Types
+
+```typescript
+const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+
+if (!allowedTypes.includes(file.type)) {
+  throw new Error('Invalid file type');
+}
+```
+
+### Limit File Size
+
+```typescript
+const maxSize = 5 * 1024 * 1024; // 5MB
+
+if (file.size > maxSize) {
+  throw new Error('File too large');
+}
+```
+
+### Use Supabase Storage Policies
+
+```sql
+-- Only allow users to upload to their own folder
+CREATE POLICY "User uploads"
+ON storage.objects FOR INSERT
+WITH CHECK (
+  bucket_id = 'avatars' AND
+  (storage.foldername(name))[1] = auth.uid()::text
+);
+```
+
+## Security Checklist
+
+Before launching:
+
+- [ ] All secrets in environment variables
+- [ ] RLS enabled on all tables
+- [ ] Input validation on all forms
+- [ ] Authentication required on protected routes
+- [ ] File upload restrictions in place
+- [ ] No sensitive data in client-side code
+- [ ] HTTPS enabled (automatic with Vercel)
+- [ ] Error messages don't leak sensitive info
+
+## Security Review
+
+Ask AI to review your security:
+
+```
+Can you do a security review of my app?
+Check for:
+- Exposed secrets
+- Missing RLS policies
+- Unprotected routes
+- Input validation gaps
+```
+
+<Warning>
+  Security is ongoing. Regularly review your app as you add features.
+</Warning>
+
+<Card title="Security Features" icon="shield-check" href="/features/security">
+  Built-in security features in Kleap
+</Card>

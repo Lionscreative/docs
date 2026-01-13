@@ -1,0 +1,264 @@
+---
+title: "SaaS Dashboard"
+description: "Build a complete SaaS application"
+---
+
+# Build a SaaS Dashboard
+
+Create a software-as-a-service application with user authentication, dashboard, and subscription billing.
+
+## What We're Building
+
+A project management SaaS with:
+
+- User authentication (signup, login, logout)
+- Dashboard with projects overview
+- Project creation and management
+- Team collaboration
+- Subscription billing with Stripe
+
+## Prerequisites
+
+- Kleap account
+- Supabase account (free)
+- Stripe account (for payments)
+
+## Step 1: Start with Template
+
+Start with the SaaS template for a head start:
+
+1. Create new app
+2. Select **SaaS Template**
+3. Name your project
+
+The template includes:
+- Authentication setup
+- Dashboard layout
+- Basic pages
+
+## Step 2: Customize the Landing Page
+
+```
+Update the landing page:
+- Change the headline to "Project Management Made Simple"
+- Update the subheadline to describe project management features
+- Modify the feature cards to show: Task Tracking, Team Collaboration, Progress Reports
+- Update the pricing section with three tiers: Starter ($9/mo), Pro ($29/mo), Team ($79/mo)
+```
+
+## Step 3: Set Up the Database
+
+### Create Tables
+
+```
+Create these database tables:
+
+1. projects
+   - id (uuid, primary key)
+   - name (text)
+   - description (text)
+   - user_id (uuid, references auth.users)
+   - created_at (timestamp)
+
+2. tasks
+   - id (uuid, primary key)
+   - title (text)
+   - description (text)
+   - status (text: 'todo', 'in_progress', 'done')
+   - project_id (uuid, references projects)
+   - assigned_to (uuid, nullable)
+   - due_date (date, nullable)
+   - created_at (timestamp)
+
+Add RLS policies so users only see their own projects and tasks.
+```
+
+## Step 4: Build the Dashboard
+
+### Projects List
+
+```
+Create a projects dashboard that shows:
+- Grid of project cards
+- Each card shows: name, description preview, task count, last updated
+- "New Project" button in the top right
+- Empty state if no projects exist
+```
+
+### Project Detail Page
+
+```
+Create a project detail page at /dashboard/projects/[id] that shows:
+- Project name and description at top
+- Task list with columns: To Do, In Progress, Done (Kanban style)
+- Ability to drag tasks between columns
+- Add task button that opens a modal
+```
+
+### Create Project Modal
+
+```
+Add a "Create Project" modal with:
+- Name input (required)
+- Description textarea
+- Cancel and Create buttons
+- Save to database on create
+- Redirect to the new project after creation
+```
+
+## Step 5: Task Management
+
+### Task Card
+
+```
+Create a task card component showing:
+- Task title
+- Due date (if set)
+- Assignee avatar (if assigned)
+- Status indicator
+- Click to open detail view
+```
+
+### Add Task
+
+```
+Create an "Add Task" form with:
+- Title (required)
+- Description
+- Due date picker
+- Status dropdown
+- Save to the project's task list
+```
+
+### Task Actions
+
+```
+Add task actions:
+- Click to edit task details
+- Mark as complete (moves to Done column)
+- Delete task (with confirmation)
+```
+
+## Step 6: Team Features
+
+### Invite Team Members
+
+```
+Add team invitation:
+- Settings page with "Team" tab
+- Invite by email input
+- Pending invitations list
+- Team member list with remove option
+```
+
+### Assign Tasks
+
+```
+Update tasks to support assignment:
+- Dropdown to select team member
+- Show assignee on task card
+- Filter tasks by assignee
+```
+
+## Step 7: Stripe Integration
+
+### Connect Stripe
+
+1. Get Stripe API keys
+2. Add to environment variables:
+   ```
+   STRIPE_SECRET_KEY=sk_...
+   STRIPE_PUBLISHABLE_KEY=pk_...
+   ```
+
+### Create Subscription Flow
+
+```
+Add Stripe subscription:
+- Pricing page with plan comparison
+- "Subscribe" buttons that create Stripe checkout sessions
+- Webhook handling for subscription events
+- Update user's plan in database after successful payment
+- Show current plan in settings
+```
+
+### Manage Subscription
+
+```
+Add subscription management:
+- Current plan display
+- "Manage Subscription" button that opens Stripe portal
+- Cancel subscription option
+```
+
+## Step 8: Polish
+
+### Loading States
+
+```
+Add loading states:
+- Skeleton loaders for project cards
+- Loading spinner for task operations
+- Disable buttons during async actions
+```
+
+### Empty States
+
+```
+Add empty states:
+- No projects: "Create your first project"
+- No tasks: "Add a task to get started"
+- No team members: "Invite your team"
+```
+
+### Responsive Design
+
+```
+Make the dashboard mobile-friendly:
+- Collapsible sidebar on mobile
+- Stacked layout for task columns
+- Touch-friendly interactions
+```
+
+## Step 9: Launch
+
+### Pre-Launch Checklist
+
+- [ ] All pages load without errors
+- [ ] Auth flow works completely
+- [ ] Database operations work
+- [ ] Stripe checkout works
+- [ ] Mobile layout is usable
+- [ ] Environment variables set for production
+
+### Deploy
+
+1. Click **Publish**
+2. Test on production URL
+3. Connect custom domain (optional)
+
+## Complete Prompts Summary
+
+Here's the key prompts in order:
+
+1. Landing page customization
+2. Database schema creation
+3. Projects dashboard
+4. Project detail page with Kanban
+5. Task management features
+6. Team invitation system
+7. Stripe subscription integration
+8. Polish and responsive design
+
+## Next Steps
+
+After launch:
+
+- Add more features based on user feedback
+- Set up analytics to track usage
+- Create onboarding flow for new users
+- Add email notifications
+
+<Card title="Stripe Integration" icon="credit-card" href="/integrations/stripe">
+  Detailed Stripe setup guide
+</Card>

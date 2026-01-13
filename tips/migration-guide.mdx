@@ -1,0 +1,197 @@
+---
+title: "Migration Guide"
+description: "Moving from Lovable, Bolt, or v0 to Kleap"
+---
+
+# Migration Guide
+
+Coming from another AI app builder? Here's how to get started with Kleap.
+
+## From Lovable
+
+Lovable and Kleap are similar in concept. Here's what to know:
+
+### What's the Same
+
+- AI-powered chat interface
+- Real-time preview
+- Supabase integration
+- Vercel deployment
+- React/Next.js stack
+
+### Key Differences
+
+| Feature | Lovable | Kleap |
+|---------|---------|-------|
+| **Framework** | Vite + React | Next.js 15 |
+| **Styling** | Tailwind | Tailwind + shadcn/ui |
+| **Hosting** | Lovable Cloud | Vercel |
+| **Sandboxes** | Custom | Daytona |
+| **Pricing** | Message-based | Credit-based |
+
+### Migration Steps
+
+1. **Export from Lovable** (if possible) or note down your app's features
+2. **Create new Kleap app** from appropriate template
+3. **Recreate features** describing them to AI
+4. **Connect Supabase** - Same project or new one
+5. **Migrate data** if using same Supabase project
+
+### Lovable → Kleap Concepts
+
+| Lovable | Kleap Equivalent |
+|---------|------------------|
+| Chat | AI Chat |
+| Preview | Live Preview |
+| Deploy | Publish to Vercel |
+| Supabase | Supabase |
+| Edge Functions | API Routes + Edge Functions |
+
+## From Bolt.new
+
+Bolt and Kleap both use AI for development.
+
+### Key Differences
+
+| Feature | Bolt | Kleap |
+|---------|------|-------|
+| **Environment** | StackBlitz | Daytona |
+| **Framework** | Various | Next.js |
+| **Database** | Manual setup | Supabase built-in |
+| **Deployment** | Netlify/Vercel | Vercel |
+
+### Migration Steps
+
+1. **Note your app structure** - Pages, components, features
+2. **Create Kleap app** - Start fresh or from template
+3. **Describe features** - Tell AI what to build
+4. **Set up database** - Connect Supabase
+5. **Deploy** - Publish to Vercel
+
+### Code Migration
+
+If you have code from Bolt:
+
+```
+I have a React component from another project.
+Can you adapt it to work with our Next.js setup?
+[paste component code]
+```
+
+## From v0 (Vercel)
+
+v0 generates UI components. Kleap builds full apps.
+
+### Differences
+
+| Feature | v0 | Kleap |
+|---------|-----|-------|
+| **Output** | Components | Full apps |
+| **Database** | No | Supabase |
+| **Auth** | No | Built-in |
+| **Hosting** | Manual | Vercel |
+| **Interactivity** | Limited | Full |
+
+### Using v0 Components in Kleap
+
+If you have a v0 component you like:
+
+```
+I have this component design from v0.
+Can you integrate it into our app?
+[paste component code or describe it]
+```
+
+Or describe what you saw:
+
+```
+Create a pricing table with three tiers, similar to v0's
+pricing component style with cards and feature lists
+```
+
+## From Custom Code
+
+Have an existing React/Next.js project?
+
+### Manual Migration
+
+1. **Create new Kleap app**
+2. **Describe your app** to AI
+3. **Copy specific components** you want to keep
+4. **Ask AI to adapt** them to Kleap's structure
+
+### Example
+
+```
+I have an existing header component. Can you recreate
+something similar that matches our app's design?
+
+Features it had:
+- Logo on left
+- Nav links in center
+- User avatar dropdown on right
+- Mobile hamburger menu
+```
+
+## Data Migration
+
+### Same Supabase Project
+
+If keeping your Supabase project:
+
+1. Connect the same Supabase project in Kleap
+2. Your data is instantly available
+3. Update queries if schema changed
+
+### New Supabase Project
+
+If creating new database:
+
+1. **Export data** from old project (CSV/JSON)
+2. **Create tables** in new Supabase
+3. **Import data** via Supabase dashboard
+4. **Update RLS policies**
+
+## Feature Parity Checklist
+
+When migrating, ensure you recreate:
+
+- [ ] All pages and routes
+- [ ] Authentication flow
+- [ ] Database schema
+- [ ] API integrations
+- [ ] UI components
+- [ ] Forms and validation
+- [ ] File uploads (if any)
+- [ ] Payment integration (if any)
+
+## Tips for Smooth Migration
+
+<AccordionGroup>
+  <Accordion title="Start fresh when possible">
+    It's often faster to rebuild than migrate complex code. AI can recreate features quickly.
+  </Accordion>
+
+  <Accordion title="Document what you have">
+    Before migrating, write down all features, pages, and integrations. Use this as a checklist.
+  </Accordion>
+
+  <Accordion title="Migrate incrementally">
+    Don't try to recreate everything at once. Build core features first, then add more.
+  </Accordion>
+
+  <Accordion title="Keep old app running">
+    Keep your old app accessible until the new one is fully tested and deployed.
+  </Accordion>
+</AccordionGroup>
+
+## Getting Help
+
+Migration issues? We can help:
+
+- **Discord** - Community support and tips
+- **Email** - support@kleap.co for complex migrations
+
+<Card title="Getting Started" icon="rocket" href="/introduction/getting-started">
+  Begin building your Kleap app
+</Card>

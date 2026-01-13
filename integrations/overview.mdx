@@ -1,0 +1,102 @@
+---
+title: "Integrations Overview"
+description: "Connect powerful services to your Kleap apps"
+---
+
+# Integrations
+
+Kleap integrates with best-in-class services to power your applications.
+
+## Core Integrations
+
+<CardGroup cols={2}>
+  <Card title="Vercel" icon="triangle" href="/integrations/vercel">
+    Deploy and host your app with global CDN, automatic HTTPS, and custom domains.
+  </Card>
+  <Card title="GitHub" icon="github" href="/integrations/github">
+    Version control, code backup, and collaborative development.
+  </Card>
+  <Card title="Supabase" icon="database" href="/integrations/supabase">
+    PostgreSQL database, authentication, storage, and real-time subscriptions.
+  </Card>
+  <Card title="Stripe" icon="credit-card" href="/integrations/stripe">
+    Accept payments, manage subscriptions, and handle billing.
+  </Card>
+</CardGroup>
+
+## How Integrations Work
+
+### One-Time Setup
+
+Most integrations require a one-time OAuth connection:
+
+1. Click **Connect** for the service
+2. Authorize Kleap in the service's popup
+3. Connection is saved to your account
+4. Use across all your apps
+
+### Per-App Configuration
+
+Some integrations need app-specific setup:
+
+- **Supabase** - Each app can have its own database
+- **Custom domains** - Configured per published app
+- **Environment variables** - Set per app
+
+## Integration Status
+
+Check your connected integrations:
+
+1. Go to **Settings** > **Integrations**
+2. View connection status for each service
+3. Reconnect or disconnect as needed
+
+## Available Integrations
+
+| Service | Purpose | Setup |
+|---------|---------|-------|
+| **Vercel** | Hosting & deployment | Auto-connected |
+| **GitHub** | Code repository | One-time OAuth |
+| **Supabase** | Database & auth | One-time OAuth + per-app |
+| **Stripe** | Payments | Via templates |
+
+## AI Model Integration
+
+Kleap uses AI to build your apps. Learn about the models powering the experience:
+
+<Card title="AI Models" icon="brain" href="/integrations/ai-models">
+  Understand the AI models behind Kleap
+</Card>
+
+## Coming Soon
+
+We're always adding new integrations:
+
+- **Resend** - Transactional emails
+- **Postmark** - Email delivery
+- **Cloudinary** - Image optimization
+- **Analytics** - Advanced tracking
+
+<Info>
+  Have a service you'd like integrated? [Let us know](mailto:hello@kleap.co)!
+</Info>
+
+## Integration Best Practices
+
+<AccordionGroup>
+  <Accordion title="Keep credentials secure">
+    Use environment variables for API keys. Never commit secrets to code.
+  </Accordion>
+
+  <Accordion title="Use official integrations">
+    Our built-in integrations handle authentication securely. Avoid manual API key entry when possible.
+  </Accordion>
+
+  <Accordion title="Test in development first">
+    Verify integrations work in preview before publishing to production.
+  </Accordion>
+
+  <Accordion title="Monitor usage">
+    Keep an eye on third-party service usage to avoid unexpected charges.
+  </Accordion>
+</AccordionGroup>

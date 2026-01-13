@@ -1,0 +1,309 @@
+---
+title: "Mobile Apps"
+description: "Turn your web app into a mobile app"
+---
+
+# Mobile Apps
+
+Transform your Kleap web app into a native mobile app using Capacitor.
+
+## What is Capacitor?
+
+Capacitor is a framework that wraps your web app in a native container, allowing it to run as a mobile app on iOS and Android.
+
+Benefits:
+- **One codebase** - Your existing Kleap app
+- **Native features** - Camera, push notifications, etc.
+- **App store distribution** - Publish to App Store and Play Store
+
+## Requirements
+
+To build mobile apps, you'll need:
+
+- **macOS** - Required for iOS builds
+- **Xcode** - For iOS (free from App Store)
+- **Android Studio** - For Android
+- **Your exported code** - From GitHub or ZIP download
+
+## Getting Started
+
+### 1. Export Your App
+
+First, get your code locally:
+
+1. Push to GitHub
+2. Clone the repository
+
+```bash
+git clone https://github.com/you/your-app.git
+cd your-app
+```
+
+### 2. Install Capacitor
+
+```bash
+npm install @capacitor/core @capacitor/cli
+npx cap init
+```
+
+Follow the prompts:
+- **App name**: Your app's name
+- **App ID**: com.yourcompany.yourapp
+
+### 3. Build Your Web App
+
+```bash
+npm run build
+```
+
+### 4. Add Platforms
+
+```bash
+# iOS
+npm install @capacitor/ios
+npx cap add ios
+
+# Android
+npm install @capacitor/android
+npx cap add android
+```
+
+### 5. Sync Changes
+
+After any code changes:
+
+```bash
+npm run build
+npx cap sync
+```
+
+## iOS Development
+
+### Open in Xcode
+
+```bash
+npx cap open ios
+```
+
+### Configure
+
+1. Select your team in Xcode
+2. Set bundle identifier
+3. Configure app icons
+
+### Run on Simulator
+
+1. Select simulator in Xcode
+2. Click Run (▶️)
+
+### Run on Device
+
+1. Connect your iPhone
+2. Trust the developer certificate
+3. Select device and Run
+
+## Android Development
+
+### Open in Android Studio
+
+```bash
+npx cap open android
+```
+
+### Configure
+
+1. Wait for Gradle sync
+2. Set application ID in `build.gradle`
+3. Configure app icons
+
+### Run on Emulator
+
+1. Create virtual device in AVD Manager
+2. Click Run (▶️)
+
+### Run on Device
+
+1. Enable Developer Mode on Android phone
+2. Enable USB debugging
+3. Connect via USB
+4. Select device and Run
+
+## Native Features
+
+### Camera
+
+```bash
+npm install @capacitor/camera
+```
+
+```typescript
+import { Camera, CameraResultType } from '@capacitor/camera';
+
+const takePhoto = async () => {
+  const image = await Camera.getPhoto({
+    quality: 90,
+    resultType: CameraResultType.Uri,
+  });
+  return image.webPath;
+};
+```
+
+### Push Notifications
+
+```bash
+npm install @capacitor/push-notifications
+```
+
+```typescript
+import { PushNotifications } from '@capacitor/push-notifications';
+
+// Request permission
+await PushNotifications.requestPermissions();
+
+// Register for push
+await PushNotifications.register();
+
+// Listen for notifications
+PushNotifications.addListener('pushNotificationReceived', notification => {
+  console.log('Push received:', notification);
+});
+```
+
+### Geolocation
+
+```bash
+npm install @capacitor/geolocation
+```
+
+```typescript
+import { Geolocation } from '@capacitor/geolocation';
+
+const getLocation = async () => {
+  const position = await Geolocation.getCurrentPosition();
+  return {
+    lat: position.coords.latitude,
+    lng: position.coords.longitude,
+  };
+};
+```
+
+### Storage
+
+```bash
+npm install @capacitor/preferences
+```
+
+```typescript
+import { Preferences } from '@capacitor/preferences';
+
+// Save
+await Preferences.set({ key: 'user', value: JSON.stringify(user) });
+
+// Load
+const { value } = await Preferences.get({ key: 'user' });
+const user = JSON.parse(value);
+```
+
+## App Store Submission
+
+### iOS App Store
+
+1. **Apple Developer Account** - $99/year
+2. **Build Archive** - Product → Archive in Xcode
+3. **App Store Connect** - Create app listing
+4. **Upload** - Via Xcode or Transporter
+5. **Submit for Review** - Usually 24-48 hours
+
+### Google Play Store
+
+1. **Google Play Developer Account** - $25 one-time
+2. **Build APK/Bundle** - Build → Generate Signed Bundle
+3. **Play Console** - Create app listing
+4. **Upload** - Upload AAB file
+5. **Submit for Review** - Usually few hours
+
+## Configuration Tips
+
+### Splash Screen
+
+```bash
+npm install @capacitor/splash-screen
+```
+
+```typescript
+// capacitor.config.ts
+const config: CapacitorConfig = {
+  plugins: {
+    SplashScreen: {
+      launchShowDuration: 2000,
+      backgroundColor: '#ffffff',
+    },
+  },
+};
+```
+
+### Status Bar
+
+```bash
+npm install @capacitor/status-bar
+```
+
+```typescript
+import { StatusBar, Style } from '@capacitor/status-bar';
+
+// Dark content for light backgrounds
+StatusBar.setStyle({ style: Style.Dark });
+```
+
+### Safe Areas
+
+Handle notches and home indicators:
+
+```css
+.app-container {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+```
+
+## Common Issues
+
+<AccordionGroup>
+  <Accordion title="White screen on launch">
+    - Check console for errors
+    - Verify build completed successfully
+    - Check `capacitor.config.ts` webDir matches output
+  </Accordion>
+
+  <Accordion title="Native features not working">
+    - Run `npx cap sync` after changes
+    - Check permissions in platform config
+    - Verify plugin is installed
+  </Accordion>
+
+  <Accordion title="App rejected from store">
+    - Read rejection reason carefully
+    - Common: missing privacy policy, incomplete metadata
+    - iOS: ensure proper permissions explanations
+  </Accordion>
+</AccordionGroup>
+
+## PWA Alternative
+
+If native apps are too complex, consider a PWA:
+
+```
+"Make this app installable as a PWA with offline support"
+```
+
+PWAs can be installed on phones without app stores, though with some limitations.
+
+## Resources
+
+- [Capacitor Documentation](https://capacitorjs.com/docs)
+- [Apple Developer](https://developer.apple.com)
+- [Google Play Console](https://play.google.com/console)
+
+<Card title="Self Hosting" icon="server" href="/tips/self-hosting">
+  Deploy your web app to custom infrastructure
+</Card>

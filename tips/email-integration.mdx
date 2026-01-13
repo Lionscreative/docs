@@ -1,0 +1,284 @@
+---
+title: "Email Integration"
+description: "Send emails from your app"
+---
+
+# Email Integration
+
+Add email functionality to send notifications, confirmations, and newsletters.
+
+## Email Services
+
+Recommended services for sending email:
+
+| Service | Best For | Free Tier |
+|---------|----------|-----------|
+| **Resend** | Developer-friendly | 3K/month |
+| **Postmark** | Transactional email | 100/month |
+| **SendGrid** | High volume | 100/day |
+| **Mailgun** | Flexibility | 5K/month |
+
+## Setting Up Resend
+
+### 1. Create Account
+
+1. Go to [resend.com](https://resend.com)
+2. Sign up for free account
+3. Verify your email
+
+### 2. Add API Key
+
+1. Get API key from Resend dashboard
+2. Add to Kleap environment variables:
+
+```
+RESEND_API_KEY=re_xxxxx
+```
+
+### 3. Verify Domain (Optional)
+
+For custom from addresses, verify your domain in Resend.
+
+### 4. Send Emails
+
+```
+"Add email functionality using Resend to send welcome emails
+when users sign up"
+```
+
+```typescript
+// app/api/send-email/route.ts
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function POST(request: Request) {
+  const { to, subject, html } = await request.json();
+
+  const { data, error } = await resend.emails.send({
+    from: 'hello@yourdomain.com',
+    to,
+    subject,
+    html,
+  });
+
+  if (error) {
+    return Response.json({ error }, { status: 500 });
+  }
+
+  return Response.json({ data });
+}
+```
+
+## Common Email Types
+
+### Welcome Email
+
+```
+"Send a welcome email when a user signs up with their name
+and a link to get started"
+```
+
+### Password Reset
+
+```
+"Add forgot password functionality that sends a reset link via email"
+```
+
+### Order Confirmation
+
+```
+"Send an order confirmation email with order details when a
+purchase is completed"
+```
+
+### Newsletter
+
+```
+"Add newsletter signup that stores emails in the database
+and can send bulk emails"
+```
+
+## Email Templates
+
+### HTML Email
+
+```typescript
+const emailHtml = `
+  <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+    <h1 style="color: #333;">Welcome, ${name}!</h1>
+    <p>Thanks for signing up. Here's how to get started:</p>
+    <a href="${appUrl}/dashboard"
+       style="background: #0070f3; color: white; padding: 12px 24px;
+              text-decoration: none; border-radius: 6px;">
+      Go to Dashboard
+    </a>
+  </div>
+`;
+```
+
+### React Email Templates
+
+For complex emails, use React Email:
+
+```
+"Install @react-email/components and create a reusable
+welcome email template"
+```
+
+```typescript
+import { Html, Button, Text } from '@react-email/components';
+
+export function WelcomeEmail({ name, dashboardUrl }) {
+  return (
+    <Html>
+      <Text>Welcome, {name}!</Text>
+      <Button href={dashboardUrl}>Go to Dashboard</Button>
+    </Html>
+  );
+}
+```
+
+## Supabase Auth Emails
+
+Supabase Auth includes built-in emails:
+
+- Signup confirmation
+- Password reset
+- Magic link login
+- Email change confirmation
+
+### Customize Auth Emails
+
+1. Go to Supabase Dashboard → Auth → Email Templates
+2. Customize templates with your branding
+3. Set your from address
+
+## Email Best Practices
+
+### Avoid Spam Filters
+
+<CardGroup cols={2}>
+  <Card title="Use verified domain" icon="check">
+    Set up SPF, DKIM, and DMARC
+  </Card>
+  <Card title="Clear from address" icon="envelope">
+    Use recognizable sender name
+  </Card>
+  <Card title="Meaningful subject" icon="heading">
+    Avoid spam trigger words
+  </Card>
+  <Card title="Include unsubscribe" icon="link">
+    Required for marketing emails
+  </Card>
+</CardGroup>
+
+### Rate Limiting
+
+Don't send too many emails too fast:
+
+```typescript
+// Simple rate limiting
+const lastSent = await getLastEmailTime(userId);
+if (Date.now() - lastSent < 60000) {
+  throw new Error('Please wait before sending another email');
+}
+```
+
+### Error Handling
+
+```typescript
+try {
+  await resend.emails.send({ ... });
+} catch (error) {
+  console.error('Email failed:', error);
+  // Log to database for retry
+  await logFailedEmail({ to, subject, error });
+}
+```
+
+## Email with Queues
+
+For high-volume or reliable email:
+
+### Using Supabase Edge Functions
+
+```typescript
+// Trigger email asynchronously
+await supabase.functions.invoke('send-email', {
+  body: { to, subject, html }
+});
+```
+
+### Queue Emails in Database
+
+```sql
+CREATE TABLE email_queue (
+  id uuid PRIMARY KEY,
+  to_email text,
+  subject text,
+  html text,
+  status text DEFAULT 'pending',
+  created_at timestamptz DEFAULT now()
+);
+```
+
+Then process with a cron job or edge function.
+
+## Testing Emails
+
+### Development
+
+Use Resend's test mode or services like:
+
+- **Mailtrap** - Catches all test emails
+- **Ethereal** - Fake SMTP for testing
+
+### Check Rendering
+
+Preview emails in different clients:
+
+- **Litmus** - Email testing
+- **Email on Acid** - Rendering tests
+
+## Environment Setup
+
+### Development
+
+```
+RESEND_API_KEY=re_test_xxxxx  # Test key
+```
+
+### Production
+
+```
+RESEND_API_KEY=re_xxxxx       # Live key
+```
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Emails not sending">
+    - Check API key is correct
+    - Verify environment variable is set
+    - Check service dashboard for errors
+    - Verify from address is authorized
+  </Accordion>
+
+  <Accordion title="Emails going to spam">
+    - Set up domain verification
+    - Check email content for spam triggers
+    - Use a reputable email service
+    - Add proper unsubscribe link
+  </Accordion>
+
+  <Accordion title="Rate limited">
+    - Check your service's rate limits
+    - Implement queuing for bulk sends
+    - Upgrade plan if needed
+  </Accordion>
+</AccordionGroup>
+
+<Card title="Supabase Integration" icon="database" href="/integrations/supabase">
+  Database for storing email logs
+</Card>

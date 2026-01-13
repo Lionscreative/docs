@@ -1,0 +1,153 @@
+---
+title: "Prompting Overview"
+description: "How to communicate effectively with Kleap's AI"
+---
+
+# Prompting Overview
+
+The key to building great apps with Kleap is writing effective prompts. This guide will help you communicate clearly with the AI.
+
+## The Basics
+
+A prompt is simply a message describing what you want to build or change. The better your prompt, the better the result.
+
+### Good Prompt Characteristics
+
+<CardGroup cols={2}>
+  <Card title="Clear" icon="bullseye">
+    State exactly what you want, not what you don't want
+  </Card>
+  <Card title="Specific" icon="list-check">
+    Include details about styling, behavior, and placement
+  </Card>
+  <Card title="Contextual" icon="map">
+    Reference existing elements or pages when relevant
+  </Card>
+  <Card title="Focused" icon="compress">
+    One task per prompt for best results
+  </Card>
+</CardGroup>
+
+## Prompt Examples
+
+### Creating Components
+
+```
+❌ Vague: "Add a header"
+
+✅ Specific: "Add a header with the logo on the left, navigation
+links (Home, Features, Pricing) in the center, and a 'Get Started'
+button on the right"
+```
+
+### Styling Changes
+
+```
+❌ Vague: "Make it look better"
+
+✅ Specific: "Change the background to a gradient from blue-500
+to purple-600, increase the heading size, and add more spacing
+between the cards"
+```
+
+### Adding Features
+
+```
+❌ Vague: "Add user accounts"
+
+✅ Specific: "Add user authentication with email/password signup,
+a login page, and protect the dashboard route so only logged-in
+users can access it"
+```
+
+## Prompt Structure
+
+A well-structured prompt typically includes:
+
+### 1. Action
+
+What you want to do (create, add, change, fix, remove)
+
+### 2. Subject
+
+What element or feature you're targeting
+
+### 3. Details
+
+Specific requirements, styling, or behavior
+
+### Example
+
+```
+[Action] Create
+[Subject] a pricing section
+[Details] with three tiers (Free, Pro, Enterprise), showing price,
+features list, and a CTA button for each. Use a card layout with
+the Pro tier highlighted.
+```
+
+## Using Element Selection
+
+Click on elements in the preview to give the AI context:
+
+1. **Click** the element you want to modify
+2. **Type** your change request
+3. AI knows exactly what you're referring to
+
+```
+[After selecting a button]
+"Make this larger and change the text to 'Start Free Trial'"
+```
+
+This is often more effective than describing the element in text.
+
+## Iteration
+
+Building is iterative. Start simple and refine:
+
+<Steps>
+  <Step title="Start with structure">
+    "Create a landing page with a hero section, features, and footer"
+  </Step>
+  <Step title="Add details">
+    "Add three feature cards with icons to the features section"
+  </Step>
+  <Step title="Refine styling">
+    "Make the hero background a gradient and increase the heading size"
+  </Step>
+  <Step title="Add functionality">
+    "Make the email signup form save to the database"
+  </Step>
+</Steps>
+
+## When Things Go Wrong
+
+If the AI doesn't get it right:
+
+1. **Clarify** - Rephrase with more detail
+2. **Correct** - "That's not quite right, I wanted..."
+3. **Undo** - Use version history if needed
+4. **Break down** - Split complex requests into steps
+
+## Credit Usage
+
+Each prompt uses credits based on:
+
+- Length of your message
+- Complexity of the response
+- Amount of code generated
+
+<Tip>
+  Concise, specific prompts are more credit-efficient than vague ones that require multiple iterations.
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Best Practices" icon="star" href="/prompting/best-practices">
+    Advanced techniques for better results
+  </Card>
+  <Card title="Debugging" icon="bug" href="/prompting/debugging">
+    How to fix errors and troubleshoot
+  </Card>
+</CardGroup>

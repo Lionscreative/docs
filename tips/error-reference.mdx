@@ -1,0 +1,296 @@
+---
+title: "Error Reference"
+description: "Common error messages and how to fix them"
+---
+
+# Error Reference
+
+A guide to common error messages and their solutions.
+
+## Build Errors
+
+### Module not found
+
+```
+Error: Cannot find module '@/components/Button'
+```
+
+**Cause**: The imported file doesn't exist or path is wrong.
+
+**Fix**:
+```
+The import '@/components/Button' can't be found.
+Can you check if the file exists and fix the import path?
+```
+
+---
+
+### Unexpected token
+
+```
+SyntaxError: Unexpected token '<'
+```
+
+**Cause**: JavaScript syntax error, often in JSX.
+
+**Fix**:
+```
+Getting a syntax error "Unexpected token".
+Can you find and fix the syntax issue?
+```
+
+---
+
+### Type error
+
+```
+Type 'string' is not assignable to type 'number'
+```
+
+**Cause**: TypeScript type mismatch.
+
+**Fix**:
+```
+Getting this type error: [full error message]
+Can you fix the type issue?
+```
+
+---
+
+### Export not found
+
+```
+Attempted import error: 'Button' is not exported from './components'
+```
+
+**Cause**: Component exists but isn't exported.
+
+**Fix**:
+```
+The 'Button' component isn't exported properly.
+Can you add the export to the component file?
+```
+
+## Runtime Errors
+
+### Cannot read properties of undefined
+
+```
+TypeError: Cannot read properties of undefined (reading 'map')
+```
+
+**Cause**: Trying to use a method on undefined/null value.
+
+**Fix**:
+```
+Getting "Cannot read properties of undefined" when mapping over data.
+Can you add a check for undefined and handle the empty state?
+```
+
+---
+
+### X is not a function
+
+```
+TypeError: response.json is not a function
+```
+
+**Cause**: Variable isn't what you expect.
+
+**Fix**:
+```
+Getting "[x] is not a function" error.
+Can you check the variable type and fix the function call?
+```
+
+---
+
+### Network error
+
+```
+TypeError: Failed to fetch
+```
+
+**Cause**: API request failed (network, CORS, or server error).
+
+**Fix**:
+```
+API fetch is failing with a network error.
+Can you check the API endpoint and error handling?
+```
+
+## React/Next.js Errors
+
+### Hydration mismatch
+
+```
+Hydration failed because the initial UI does not match what was rendered on the server
+```
+
+**Cause**: Server and client render different content.
+
+**Fix**:
+```
+Getting a hydration mismatch error.
+Can you fix the component to render the same on server and client?
+```
+
+Common causes:
+- Using `Date.now()` or `Math.random()` directly
+- Accessing `window` or `localStorage` without checks
+- Conditional rendering based on browser-only values
+
+---
+
+### Invalid hook call
+
+```
+Invalid hook call. Hooks can only be called inside of the body of a function component
+```
+
+**Cause**: Hook used incorrectly.
+
+**Fix**:
+```
+Getting "Invalid hook call" error.
+Can you check that hooks are only used in function components and not inside conditions or loops?
+```
+
+---
+
+### Too many re-renders
+
+```
+Error: Too many re-renders. React limits the number of renders
+```
+
+**Cause**: Component is in infinite render loop.
+
+**Fix**:
+```
+Getting "Too many re-renders" error.
+Can you find and fix the infinite loop in the component?
+```
+
+Usually caused by:
+- Calling `setState` directly in render
+- Missing dependency array in `useEffect`
+- State update triggering another state update
+
+## Database Errors
+
+### RLS policy violation
+
+```
+new row violates row-level security policy for table "posts"
+```
+
+**Cause**: RLS blocking the operation.
+
+**Fix**:
+```
+Getting RLS policy violation when [inserting/updating/deleting].
+Can you check and fix the RLS policies for this table?
+```
+
+---
+
+### Foreign key violation
+
+```
+insert or update on table "posts" violates foreign key constraint
+```
+
+**Cause**: Referenced record doesn't exist.
+
+**Fix**:
+```
+Getting foreign key violation error.
+The referenced [table] record doesn't exist.
+Can you fix the query or create the referenced record first?
+```
+
+---
+
+### Duplicate key
+
+```
+duplicate key value violates unique constraint
+```
+
+**Cause**: Trying to insert duplicate value in unique column.
+
+**Fix**:
+```
+Getting duplicate key error.
+Can you add a check for existing records or use upsert?
+```
+
+## Authentication Errors
+
+### Session not found
+
+```
+AuthSessionMissingError: Auth session missing
+```
+
+**Cause**: User not logged in or session expired.
+
+**Fix**:
+```
+Getting "session missing" error.
+Can you add authentication check and redirect to login if not authenticated?
+```
+
+---
+
+### Invalid login credentials
+
+```
+AuthApiError: Invalid login credentials
+```
+
+**Cause**: Wrong email or password.
+
+**Fix**: This is expected for wrong credentials. Ensure your error handling shows a user-friendly message.
+
+## Environment Variable Errors
+
+### Missing environment variable
+
+```
+Error: Missing environment variable: NEXT_PUBLIC_SUPABASE_URL
+```
+
+**Cause**: Required variable not set.
+
+**Fix**:
+1. Go to Settings > Environment
+2. Add the missing variable
+3. Redeploy if in production
+
+## Quick Reference Table
+
+| Error Contains | Likely Cause | Quick Fix |
+|----------------|--------------|-----------|
+| `Cannot find module` | Wrong import | Check file path |
+| `undefined` | Missing data | Add null check |
+| `not a function` | Wrong variable type | Check variable |
+| `Hydration` | Server/client mismatch | Fix SSR |
+| `Invalid hook` | Hook misuse | Check hook rules |
+| `Too many re-renders` | Infinite loop | Fix useEffect/setState |
+| `RLS policy` | Security policy | Check Supabase RLS |
+| `Failed to fetch` | Network/API issue | Check endpoint |
+| `NEXT_PUBLIC_` | Env var missing | Add to settings |
+
+## Getting More Help
+
+If an error isn't listed here:
+
+1. **Copy the full error message**
+2. **Paste it to Kleap AI** with context about what you were doing
+3. **Check browser console** for additional details
+
+<Card title="Troubleshooting Guide" icon="wrench" href="/tips/troubleshooting">
+  Step-by-step solutions to common problems
+</Card>

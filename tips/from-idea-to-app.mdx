@@ -1,0 +1,290 @@
+---
+title: "From Idea to App"
+description: "Complete guide to building an app from scratch"
+---
+
+# From Idea to App
+
+A step-by-step guide to taking your idea from concept to launched product.
+
+## Phase 1: Planning
+
+### Define Your Goal
+
+Before opening Kleap, answer:
+
+1. **What problem does this solve?**
+2. **Who is it for?**
+3. **What are the must-have features?**
+4. **What can wait for later?**
+
+### Feature Prioritization
+
+Use the MoSCoW method:
+
+| Priority | Features |
+|----------|----------|
+| **Must Have** | Core functionality that makes it work |
+| **Should Have** | Important but not essential at launch |
+| **Could Have** | Nice to have if time permits |
+| **Won't Have** | Save for future versions |
+
+### Example: Task Manager App
+
+| Priority | Features |
+|----------|----------|
+| **Must Have** | Create tasks, mark complete, delete |
+| **Should Have** | Due dates, categories |
+| **Could Have** | Reminders, sharing |
+| **Won't Have** | Mobile app, integrations |
+
+## Phase 2: Setup
+
+### Choose Your Starting Point
+
+<Tabs>
+  <Tab title="Use Template">
+    Start with a template if one matches your idea:
+    - **SaaS Template** - User auth, dashboard, billing
+    - **Landing Page** - Marketing sites
+    - **E-commerce** - Product sales
+  </Tab>
+  <Tab title="Start Blank">
+    Start from scratch for unique ideas:
+    1. Create new app
+    2. Choose "Blank" template
+    3. Describe your first page
+  </Tab>
+</Tabs>
+
+### Initial Prompt
+
+Start with a high-level description:
+
+```
+I'm building a task management app for freelancers.
+Create the basic structure with:
+- A clean landing page
+- Navigation with Home, Features, Pricing, Login
+- Footer with links and social icons
+```
+
+## Phase 3: Build Core Features
+
+### Work in Layers
+
+<Steps>
+  <Step title="Layout First">
+    Build navigation, footer, page structure
+  </Step>
+  <Step title="Pages Next">
+    Create main pages with placeholder content
+  </Step>
+  <Step title="Components">
+    Build reusable UI components
+  </Step>
+  <Step title="Data Layer">
+    Connect database, define schema
+  </Step>
+  <Step title="Functionality">
+    Add interactions, forms, logic
+  </Step>
+</Steps>
+
+### Example Build Sequence
+
+```
+1. "Create a dashboard layout with sidebar navigation"
+
+2. "Add a tasks list component showing task name, due date, and status"
+
+3. "Create a Supabase table for tasks with fields: id, title,
+   description, due_date, status, user_id"
+
+4. "Connect the tasks list to fetch from the database"
+
+5. "Add a form to create new tasks"
+
+6. "Add the ability to mark tasks as complete"
+```
+
+### One Feature at a Time
+
+Don't rush. Complete each feature before moving on:
+
+1. Build it
+2. Test it
+3. Fix any issues
+4. Then move on
+
+## Phase 4: User Authentication
+
+If your app needs users:
+
+```
+"Add user authentication with:
+- Sign up with email/password
+- Login page
+- Protect the dashboard route
+- Show user's name in the header"
+```
+
+### Link Data to Users
+
+Ensure data belongs to users:
+
+```
+"Update the tasks table to include user_id and add RLS
+policies so users only see their own tasks"
+```
+
+## Phase 5: Polish
+
+### Visual Refinement
+
+```
+"Improve the overall design:
+- Add consistent spacing between sections
+- Use a cohesive color palette (blue primary)
+- Add hover states to buttons and links
+- Ensure good contrast for accessibility"
+```
+
+### Responsive Design
+
+```
+"Make sure all pages work well on mobile:
+- Collapsible navigation
+- Stacked layouts on small screens
+- Appropriate text sizes"
+```
+
+### Loading States
+
+```
+"Add loading skeletons while data is being fetched"
+```
+
+### Error Handling
+
+```
+"Add proper error handling:
+- Show error messages if data fails to load
+- Validate forms before submission
+- Handle network errors gracefully"
+```
+
+## Phase 6: Testing
+
+### Manual Testing Checklist
+
+- [ ] All pages load without errors
+- [ ] Forms submit correctly
+- [ ] Data saves and loads properly
+- [ ] Auth flow works (signup → login → logout)
+- [ ] Protected routes redirect properly
+- [ ] Mobile layout works
+- [ ] All buttons/links work
+
+### Test Edge Cases
+
+- Empty states (no data)
+- Long content
+- Invalid input
+- Slow network
+- Different browsers
+
+## Phase 7: Launch Prep
+
+### Environment Variables
+
+Ensure all secrets are in environment variables:
+
+```
+"Move any hardcoded API keys to environment variables"
+```
+
+### SEO
+
+```
+"Add SEO metadata to all pages including title,
+description, and Open Graph tags"
+```
+
+### Analytics
+
+```
+"Add Vercel Analytics to track page views"
+```
+
+## Phase 8: Launch
+
+### Deploy to Production
+
+1. Click **Publish**
+2. Wait for build to complete
+3. Test the live site
+
+### Custom Domain (Optional)
+
+1. Add domain in settings
+2. Configure DNS
+3. Wait for SSL certificate
+
+### Announce Your Launch
+
+- Share on social media
+- Post on relevant communities
+- Tell your network
+
+## Phase 9: Iterate
+
+### Gather Feedback
+
+- Watch how users interact
+- Collect feature requests
+- Track errors with monitoring
+
+### Plan Next Features
+
+Go back to your "Should Have" list:
+
+```
+"Now add due date reminders that notify users
+via email one day before"
+```
+
+## Common Mistakes to Avoid
+
+<AccordionGroup>
+  <Accordion title="Building too much at once">
+    Launch with minimum viable features. You can always add more.
+  </Accordion>
+
+  <Accordion title="Not testing enough">
+    Test thoroughly before launch. First impressions matter.
+  </Accordion>
+
+  <Accordion title="Ignoring mobile">
+    Many users browse on phones. Always check mobile layout.
+  </Accordion>
+
+  <Accordion title="Skipping auth security">
+    Always enable RLS. One security hole can ruin your app.
+  </Accordion>
+</AccordionGroup>
+
+## Timeline Expectations
+
+A simple app can go from idea to launch in:
+
+- **Landing page**: 1-2 hours
+- **Simple app (no auth)**: 2-4 hours
+- **App with auth & database**: 4-8 hours
+- **Complex app**: Multiple sessions
+
+Build incrementally. Don't rush.
+
+<Card title="Best Practices" icon="star" href="/tips/best-practices">
+  More tips for successful building
+</Card>

@@ -1,0 +1,231 @@
+---
+title: "GitHub"
+description: "Version control and code backup with GitHub"
+---
+
+# GitHub Integration
+
+Push your Kleap app code to GitHub for version control, backup, and collaboration.
+
+## Why GitHub?
+
+- **Version control** - Track every change with Git
+- **Backup** - Code stored safely in the cloud
+- **Collaboration** - Work with developers
+- **CI/CD** - Trigger deployments from commits
+- **Portability** - Take your code anywhere
+
+## Connecting GitHub
+
+### One-Time Setup
+
+1. Go to **Settings** > **GitHub**
+2. Click **Connect GitHub**
+3. Authorize Kleap in the popup
+4. Select repositories access
+
+### Permissions Requested
+
+- Read your profile
+- Create repositories
+- Push to repositories
+- Read repository contents
+
+<Info>
+  We only access repositories you explicitly connect. Your other repos remain private.
+</Info>
+
+## Pushing Code to GitHub
+
+### Create New Repository
+
+1. Open your app
+2. Go to **Settings** > **GitHub**
+3. Click **Create Repository**
+4. Enter repository name
+5. Choose public or private
+6. Click **Create & Push**
+
+### Connect Existing Repository
+
+1. Open your app
+2. Go to **Settings** > **GitHub**
+3. Click **Connect Repository**
+4. Select from your repositories
+5. Confirm connection
+
+<Warning>
+  Connecting to an existing repo will overwrite its contents. Make sure it's empty or a backup exists.
+</Warning>
+
+## Syncing Changes
+
+### Push to GitHub
+
+After making changes in Kleap:
+
+1. Go to **Settings** > **GitHub**
+2. Click **Push Changes**
+3. Enter a commit message (optional)
+4. Changes are pushed to your repo
+
+### Auto-Push
+
+Enable automatic syncing:
+
+1. Go to **Settings** > **GitHub**
+2. Toggle **Auto-push on publish**
+3. Every publish also pushes to GitHub
+
+## Repository Structure
+
+Your GitHub repo contains the full Next.js project:
+
+```
+your-app/
+├── app/                  # Pages and routes
+├── components/           # React components
+├── lib/                  # Utilities
+├── public/               # Static assets
+├── styles/               # CSS files
+├── package.json          # Dependencies
+├── next.config.js        # Next.js config
+├── tailwind.config.ts    # Tailwind config
+└── tsconfig.json         # TypeScript config
+```
+
+## Working with Developers
+
+### Share with a Developer
+
+1. Push your code to GitHub
+2. Share the repository URL
+3. Developer clones and runs locally:
+
+```bash
+git clone https://github.com/you/your-app
+cd your-app
+npm install
+npm run dev
+```
+
+### Merge Developer Changes
+
+When a developer pushes changes:
+
+1. Go to **Settings** > **GitHub**
+2. Click **Pull Changes**
+3. Changes are synced to Kleap
+
+<Info>
+  Manual merges may be needed if both sides have changes. Advanced Git knowledge helps here.
+</Info>
+
+## Branches
+
+### Default Branch
+
+Kleap works with your default branch (usually `main` or `master`).
+
+### Feature Branches
+
+For experimental changes:
+
+1. Developer creates branch locally
+2. Makes changes and commits
+3. Creates pull request
+4. Merge to main when ready
+5. Pull changes into Kleap
+
+## GitHub Actions
+
+Your repository can use GitHub Actions for:
+
+- **Automated testing** - Run tests on push
+- **Code quality** - Lint and format checks
+- **Deployment** - Deploy on merge to main
+
+### Example Workflow
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+```
+
+## Private vs Public
+
+| Type | Visibility | Use Case |
+|------|------------|----------|
+| **Private** | Only you and collaborators | Client projects, proprietary code |
+| **Public** | Anyone can view | Open source, portfolios |
+
+## Disconnecting GitHub
+
+To disconnect:
+
+1. Go to **Settings** > **GitHub**
+2. Click **Disconnect**
+
+Your repository remains on GitHub. Only the Kleap connection is removed.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Push failed">
+    - Check your GitHub connection is active
+    - Ensure you have write access to the repo
+    - Try disconnecting and reconnecting
+  </Accordion>
+
+  <Accordion title="Merge conflicts">
+    - Pull changes before pushing
+    - Resolve conflicts manually if needed
+    - Consider using a developer for complex merges
+  </Accordion>
+
+  <Accordion title="Repository not showing">
+    - Ensure you granted access during OAuth
+    - Go to GitHub settings and update Kleap's permissions
+    - Try reconnecting your account
+  </Accordion>
+
+  <Accordion title="Large files rejected">
+    - GitHub has a 100MB file limit
+    - Use Git LFS for large assets
+    - Consider using a CDN for large images/videos
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Push regularly" icon="cloud-arrow-up">
+    Don't wait too long between pushes. Regular backups are safer.
+  </Card>
+  <Card title="Write good commits" icon="message">
+    Describe what changed in commit messages for future reference.
+  </Card>
+  <Card title="Use private repos" icon="lock">
+    Keep client work and proprietary code in private repositories.
+  </Card>
+  <Card title="Review before merge" icon="code-compare">
+    Always review developer changes before pulling into Kleap.
+  </Card>
+</CardGroup>
+
+<Card title="Version History" icon="clock-rotate-left" href="/features/version-history">
+  Use Kleap's built-in version history alongside GitHub
+</Card>
