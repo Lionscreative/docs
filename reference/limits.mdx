@@ -11,41 +11,27 @@ Understanding the limits of Kleap and integrated services.
 
 ### Credits
 
-| Plan | Monthly Credits | Credit Rollover |
-|------|-----------------|-----------------|
-| **Free** | 100 | No |
-| **Pro** | 1,000 | No |
-| **Business** | 5,000 | No |
+| Plan | Daily Claims | Monthly Credits | Claim Limit |
+|------|--------------|-----------------|-------------|
+| **Free** | 5 per claim | - | 30 claims/month |
+| **Pro** | 5 per claim | Included | Unlimited |
+| **Enterprise** | 5 per claim | Unlimited | Unlimited |
 
-### Credit Usage
+### How Daily Claims Work
 
-Approximate credit costs:
+- Claim once every 24 hours
+- Each claim adds 5 credits to your balance
+- Credits accumulate and never expire
+- Free users limited to 30 claims per month
 
-| Action | Credits |
-|--------|---------|
-| Simple text change | 1-2 |
-| Component creation | 3-5 |
-| Page creation | 5-10 |
-| Complex feature | 10-20 |
-| Database schema | 5-10 |
+### Published Apps (Deployments)
 
-*Actual usage varies based on complexity and response length*
-
-### Apps
-
-| Plan | Apps |
-|------|------|
+| Plan | Published Apps |
+|------|----------------|
 | **Free** | 3 |
-| **Pro** | 10 |
-| **Business** | Unlimited |
-
-### Version History
-
-| Plan | Versions Kept |
-|------|---------------|
-| **Free** | 50 |
-| **Pro** | 200 |
-| **Business** | Unlimited |
+| **Starter** | 10 |
+| **Pro** | 50 |
+| **Enterprise** | Unlimited |
 
 ### Team Members
 
@@ -53,7 +39,13 @@ Approximate credit costs:
 |------|-----------------|
 | **Free** | 2 |
 | **Pro** | 10 |
-| **Business** | Unlimited |
+| **Enterprise** | Unlimited |
+
+### Collaboration
+
+- **Invitation expiration**: 7 days
+- **Rate limit**: Max 5 invitations per hour
+- **Roles**: Owner, Editor, Viewer
 
 ## Preview (Sandbox) Limits
 
@@ -64,16 +56,23 @@ Approximate credit costs:
 | Memory | 2 GB |
 | CPU | Shared |
 | Disk Space | 10 GB |
-| Timeout | 15 min idle |
+| Auto-stop | 15 min idle |
 
 ### Sandbox Behavior
 
 - Auto-stops after 15 minutes of inactivity
-- Restarts automatically on interaction
+- Restarts automatically when you return
 - State (code, files) preserved
 - Browser sessions lost on restart
+- Preview URL format: `https://3000-{id}.proxy.daytona.works`
+
+<Info>
+  The auto-stop timeout is configurable and helps conserve resources.
+</Info>
 
 ## Vercel Limits (Deployment)
+
+These limits apply to your deployed apps on Vercel.
 
 ### Free Tier
 
@@ -95,16 +94,17 @@ Approximate credit costs:
 | Function Duration | 60 seconds |
 | Image Optimization | 5,000/month |
 
-### All Plans
+### All Vercel Plans
 
 | Resource | Limit |
 |----------|-------|
 | Deployments | Unlimited |
 | Projects | Unlimited |
 | Custom Domains | Unlimited |
-| Team Members | Varies by plan |
 
 ## Supabase Limits
+
+These limits apply to your app's database on Supabase.
 
 ### Free Tier
 
@@ -128,15 +128,6 @@ Approximate credit costs:
 | Edge Functions | 2 million/month |
 | Realtime Messages | 5 million/month |
 
-### Database Limits
-
-| Resource | Free | Pro |
-|----------|------|-----|
-| Tables | No limit | No limit |
-| Rows | 500K recommended | Millions |
-| Connections | 60 | 200 |
-| Query Size | 8 KB | 8 KB |
-
 ### Storage Limits
 
 | Resource | Limit |
@@ -155,15 +146,6 @@ Approximate credit costs:
 | Files per App | No hard limit |
 | Image Formats | JPG, PNG, GIF, WebP, SVG |
 | Video Formats | MP4, WebM |
-
-### Uploads
-
-When uploading through Kleap:
-
-| Type | Limit |
-|------|-------|
-| Single File | 10 MB |
-| Total Storage | Per Supabase plan |
 
 ## API Rate Limits
 
@@ -188,34 +170,36 @@ When uploading through Kleap:
 
 ### What Happens
 
-- **Credits exhausted**: Can't make AI changes until reset
-- **Vercel limits**: Deployment may fail or traffic limited
+- **Credits exhausted**: Can't make AI changes until next claim or upgrade
+- **App limit reached**: Can't publish new apps until you upgrade
+- **Vercel limits**: Deployment may fail or traffic throttled
 - **Supabase limits**: Database operations may fail
 
 ### Solutions
 
-1. **Upgrade plan** - More resources available
-2. **Optimize usage** - Write efficient queries, compress images
-3. **Wait for reset** - Monthly limits reset on billing cycle
+1. **Claim daily credits** - Free users can claim 5 credits every 24 hours
+2. **Upgrade plan** - More credits and higher limits
+3. **Wait for reset** - Some limits reset monthly
+4. **Optimize usage** - Write efficient queries, compress images
 
 ## Monitoring Usage
 
 ### Kleap
 
-- View credit balance in account settings
-- Usage history shows per-message costs
+- View credit balance in dashboard
+- Check published app count in Settings
 
 ### Vercel
 
 - Check dashboard for bandwidth and function usage
-- Set up usage alerts
+- Set up usage alerts in Vercel settings
 
 ### Supabase
 
 - Database size shown in dashboard
-- Storage usage visible
-- Auth usage in reports
+- Storage usage visible in Storage tab
+- Auth usage in Reports
 
 <Card title="Plans & Pricing" icon="credit-card" href="/introduction/plans-and-credits">
-  Compare plans and upgrade
+  Compare plans and understand credits
 </Card>

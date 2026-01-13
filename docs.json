@@ -9,8 +9,8 @@
   },
   "favicon": "/favicon.svg",
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
   },
   "navbar": {
     "links": [
@@ -28,7 +28,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
+        "tab": "Introduction",
         "groups": [
           {
             "group": "Getting Started",
@@ -40,9 +40,14 @@
               "introduction/faq",
               "introduction/contact-support"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Features",
+        "groups": [
           {
-            "group": "Features",
+            "group": "Core Features",
             "pages": [
               "features/overview",
               "features/ai-chat",
@@ -51,14 +56,29 @@
               "features/live-preview",
               "features/element-selection",
               "features/code-editor",
-              "features/version-history",
+              "features/version-history"
+            ]
+          },
+          {
+            "group": "Publishing",
+            "pages": [
               "features/publishing",
               "features/custom-domains",
-              "features/analytics",
+              "features/analytics"
+            ]
+          },
+          {
+            "group": "Team",
+            "pages": [
               "features/collaboration",
               "features/security"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Tips & Tricks",
+        "groups": [
           {
             "group": "Prompt Engineering",
             "pages": [
@@ -68,23 +88,38 @@
             ]
           },
           {
-            "group": "Tips & Tricks",
+            "group": "Best Practices",
             "pages": [
               "tips/best-practices",
               "tips/troubleshooting",
               "tips/sandbox-behavior",
-              "tips/error-reference",
-              "tips/migration-guide",
+              "tips/error-reference"
+            ]
+          },
+          {
+            "group": "Advanced",
+            "pages": [
               "tips/seo",
               "tips/security-tips",
               "tips/using-images",
               "tips/using-videos",
               "tips/custom-fonts",
               "tips/npm-packages",
-              "tips/email-integration",
+              "tips/email-integration"
+            ]
+          },
+          {
+            "group": "Migration & Hosting",
+            "pages": [
+              "tips/migration-guide",
               "tips/self-hosting",
+              "tips/mobile-apps"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
               "tips/from-idea-to-app",
-              "tips/mobile-apps",
               "tips/support-policy"
             ]
           }

@@ -5,114 +5,141 @@ description: "Understanding Kleap's pricing, plans, and credit system"
 
 # Plans & Credits
 
-Kleap uses a simple credit-based system. Credits are consumed when you interact with the AI to build your apps.
+Kleap uses a credit-based system. Credits are consumed when you interact with the AI to build your apps.
 
 ## Pricing Plans
+
+Kleap offers multiple plans to fit your needs:
 
 <CardGroup cols={3}>
   <Card title="Free" icon="gift">
     **$0/month**
-    - 50 credits/day
-    - Unlimited apps
+    - 5 credits per daily claim
+    - Up to 30 claims per month
+    - 3 published apps
     - Community support
-    - Vercel deployment
   </Card>
   <Card title="Pro" icon="star">
-    **$19/month**
-    - 1,500 credits/month
+    **Starting at $X/month**
+    - Monthly credit allocation
+    - 50 published apps
     - Priority support
-    - Custom domains
-    - GitHub sync
-    - Team collaboration
+    - All features included
   </Card>
-  <Card title="Business" icon="building">
-    **$49/month**
-    - 5,000 credits/month
-    - Priority support
-    - All Pro features
-    - Advanced analytics
-    - SSO (coming soon)
+  <Card title="Enterprise" icon="building">
+    **Custom pricing**
+    - Unlimited credits
+    - Unlimited apps
+    - Dedicated support
+    - Custom integrations
   </Card>
 </CardGroup>
 
-Need more? [Contact us](mailto:support@kleap.co) for Enterprise pricing.
+<Info>
+  For current pricing and plan details, visit [kleap.co/pricing](https://kleap.co/pricing)
+</Info>
 
 ## How Credits Work
 
-### Credit Consumption
+### Daily Credit Claims
 
-| Action | Credits |
-|--------|---------|
-| Simple message (styling, text changes) | 1-3 credits |
-| Medium complexity (new component, feature) | 5-15 credits |
-| Complex request (full page, database setup) | 20-50 credits |
+Every user can claim **5 free credits** once every 24 hours.
+
+- **Claim frequency**: Once per 24 hours
+- **Credits per claim**: 5 credits
+- **Monthly limit (Free plan)**: 30 claims (150 credits potential)
+- **Credits accumulate**: They don't expire and roll over
 
 <Info>
-  Credit cost depends on the complexity of your request and the AI's response length. Simple changes cost less.
+  Pro and Enterprise users get monthly credits in addition to daily claims.
 </Info>
 
-### Daily Free Credits
+### Credit Consumption
 
-All users receive **free credits daily** just for logging in:
+Credit usage varies based on the complexity of your request:
 
-- **Free plan**: 50 credits/day
-- **Paid plans**: Bonus credits on top of monthly allocation
+| Action | Estimated Credits |
+|--------|-------------------|
+| Simple styling change | 1-3 credits |
+| New component | 5-15 credits |
+| Full page creation | 15-30 credits |
+| Complex feature | 30-50 credits |
 
-### Credit Calculator
+*Actual usage depends on the AI response length and complexity.*
 
-Estimate how many credits you'll need:
+### What Happens When You Run Out?
 
-| Project Type | Estimated Credits |
-|--------------|-------------------|
-| Simple landing page | 50-100 |
-| Portfolio site | 100-200 |
-| Blog with CMS | 200-400 |
-| SaaS dashboard | 400-800 |
-| E-commerce store | 500-1000 |
+- Your apps continue to work normally
+- You can't make new AI-assisted changes until you get more credits
+- Options to get more credits:
+  - Wait and claim your next daily credits
+  - Upgrade to a paid plan
+  - Refer friends to earn bonus credits
 
-## Billing FAQ
+## Referral Program
 
-<AccordionGroup>
-  <Accordion title="What happens when I run out of credits?">
-    Your apps continue to work normally. You just can't make new AI-assisted changes until you get more credits. You can:
-    - Wait for daily free credits
-    - Upgrade your plan
-    - Purchase additional credits
-  </Accordion>
-  <Accordion title="Do unused credits roll over?">
-    Monthly credits do not roll over. Daily free credits reset every 24 hours.
-  </Accordion>
-  <Accordion title="Can I cancel anytime?">
-    Yes. Cancel anytime from Settings > Billing. You'll keep access until the end of your billing period.
-  </Accordion>
-  <Accordion title="Is there a refund policy?">
-    We offer refunds within 7 days of purchase if you haven't used more than 20% of your credits. Contact support@kleap.co.
-  </Accordion>
-  <Accordion title="Can I buy extra credits without upgrading?">
-    Yes. You can purchase credit packs separately from your subscription.
-  </Accordion>
-</AccordionGroup>
+Earn bonus credits by inviting friends:
+
+| Who | Credits Earned |
+|-----|----------------|
+| **You (referrer)** | +15 credits when they publish their first app |
+| **Your friend (referee)** | +10 credits on signup |
+
+<Warning>
+  Referral credits are capped at 25 credits total per referrer.
+</Warning>
+
+### How to Refer
+
+1. Go to **Settings** in your dashboard
+2. Copy your unique referral link
+3. Share it with friends
+4. They sign up and you both earn credits
 
 ## Free Actions
 
 These actions don't consume credits:
 
-- Viewing your apps
-- Browsing templates
-- Managing settings
+- Viewing and browsing your apps
+- Browsing template gallery
+- Managing account settings
 - Viewing version history
 - Publishing to Vercel (deployment is free)
-- Connecting domains
-- File browser and code viewer
+- Connecting custom domains
+- Using the file browser and code viewer
+- Team collaboration features
 
-## Referral Program
+## Plans Comparison
 
-Earn free credits by referring friends:
+| Feature | Free | Pro | Enterprise |
+|---------|------|-----|------------|
+| Daily credit claims | 5/day | 5/day | 5/day |
+| Monthly credits | - | Included | Unlimited |
+| Published apps | 3 | 50 | Unlimited |
+| Custom domains | Limited | Unlimited | Unlimited |
+| Team members | 2 | 10 | Unlimited |
+| Support | Community | Priority | Dedicated |
 
-1. Share your referral link from Settings
-2. When they sign up and create their first app
-3. Both of you receive **100 bonus credits**
+## Billing FAQ
 
-<Card title="Get Started" icon="rocket" href="https://kleap.co">
-  Start building with free credits today
+<AccordionGroup>
+  <Accordion title="What happens when I run out of credits?">
+    Your apps continue to work normally. You just can't make new AI-assisted changes until you get more credits. You can claim your next daily credits or upgrade your plan.
+  </Accordion>
+  <Accordion title="Do unused credits expire?">
+    No! Your credits accumulate and never expire. Daily claims add to your balance.
+  </Accordion>
+  <Accordion title="Can I cancel anytime?">
+    Yes. Cancel anytime from Settings. You'll keep access until the end of your billing period.
+  </Accordion>
+  <Accordion title="How do I claim daily credits?">
+    Visit your dashboard and click the "Claim Credits" button. You can claim once every 24 hours.
+  </Accordion>
+  <Accordion title="Is there a limit on daily claims?">
+    Free users can make up to 30 daily claims per month. Paid users have no limit on daily claims.
+  </Accordion>
+</AccordionGroup>
+
+<Card title="View Current Pricing" icon="credit-card" href="https://kleap.co/pricing">
+  See the latest plans and pricing on kleap.co
 </Card>
