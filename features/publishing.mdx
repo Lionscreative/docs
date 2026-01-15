@@ -3,33 +3,18 @@ title: "Publishing"
 description: "Deploy your app to production with one click"
 ---
 
-Publish your app to Vercel for a permanent, always-online production deployment.
+Publish your app to get a permanent, always-online production URL.
 
-## Why Vercel?
+## One-Click Publishing
 
-Kleap deploys to **Vercel**, the company behind Next.js:
-
-- **Global CDN** - Fast loading worldwide
-- **Automatic HTTPS** - Free SSL certificates
-- **Instant deploys** - Go live in seconds
-- **Free tier** - Generous limits for most apps
-
-## Publishing Your App
-
-### First-Time Setup
+Publishing your app is simple:
 
 1. Click **Publish** in the top toolbar
-2. Connect your **Vercel account** (one-time)
-3. Authorize Kleap to deploy
-
-### Deploy
-
-1. Click **Publish**
 2. Wait for build to complete (~30-60 seconds)
 3. Your app is live!
 
 <Info>
-  Publishing doesn't consume credits. Vercel hosting is free within their limits.
+  Publishing doesn't consume credits. Hosting is included with your Kleap account.
 </Info>
 
 ## Your Production URL
@@ -37,7 +22,7 @@ Kleap deploys to **Vercel**, the company behind Next.js:
 After publishing, you get a permanent URL:
 
 ```
-https://your-app-name.vercel.app
+https://your-app-name.kleap.co
 ```
 
 This URL:
@@ -51,7 +36,7 @@ This URL:
 
 | Aspect | Preview | Production |
 |--------|---------|------------|
-| URL | `3000-xxx.proxy.daytona.works` | `your-app.vercel.app` |
+| URL | `3000-xxx.proxy.daytona.works` | `your-app.kleap.co` |
 | Uptime | During editing | 24/7 |
 | Access | Requires login | Public |
 | Performance | Development mode | Optimized |
@@ -63,10 +48,10 @@ After initial publish:
 
 1. Make changes in Kleap
 2. Click **Publish** again
-3. New version goes live
+3. New version goes live instantly
 
 <Tip>
-  Vercel keeps previous deployments. You can roll back from the Vercel dashboard if needed.
+  Each publish creates a new version. Your changes are deployed within seconds.
 </Tip>
 
 ## Build Settings
@@ -76,14 +61,14 @@ Kleap handles build configuration automatically:
 - Next.js output optimized
 - Images compressed
 - Code minified
-- Assets cached
+- Assets cached on global CDN
 
 ## Deployment Status
 
 Track your deployment:
 
 - **Building** - Code is compiling
-- **Deploying** - Uploading to CDN
+- **Deploying** - Uploading to servers
 - **Ready** - Live and accessible
 - **Error** - Build failed (check logs)
 
@@ -107,6 +92,18 @@ For apps needing secrets (API keys):
 <Warning>
   Never put secrets in your code. Use environment variables for API keys, database URLs, etc.
 </Warning>
+
+## Unpublishing
+
+To take your app offline:
+
+1. Go to **Settings**
+2. Click **Unpublish**
+3. Your app is no longer accessible
+
+<Info>
+  Unpublishing doesn't delete your app. You can republish anytime.
+</Info>
 
 ## Next Steps
 

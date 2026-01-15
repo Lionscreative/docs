@@ -137,7 +137,6 @@
             "group": "Integrations",
             "pages": [
               "integrations/overview",
-              "integrations/vercel",
               "integrations/github",
               "integrations/supabase",
               "integrations/stripe",

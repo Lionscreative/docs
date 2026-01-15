@@ -3,7 +3,7 @@ title: "Self Hosting"
 description: "Deploy your app to your own infrastructure"
 ---
 
-While Kleap deploys to Vercel by default, you can self-host your app elsewhere.
+While Kleap provides built-in hosting by default, you can self-host your app elsewhere.
 
 ## Getting Your Code
 
@@ -48,14 +48,6 @@ npm start
 ```
 
 ## Hosting Options
-
-### Vercel (Recommended)
-
-Even for self-managed, Vercel is easy:
-
-1. Connect GitHub repo to Vercel
-2. Configure environment variables
-3. Deploy automatically on push
 
 ### Netlify
 
@@ -201,9 +193,9 @@ Add error monitoring:
 
 Add analytics:
 
-- **Vercel Analytics** - Simple (Vercel only)
 - **Plausible** - Privacy-focused
 - **Google Analytics** - Comprehensive
+- **PostHog** - Product analytics
 
 ### Uptime Monitoring
 
@@ -239,7 +231,6 @@ Use a CDN for static assets:
 
 | Platform | Ease | Cost | Control |
 |----------|------|------|---------|
-| **Vercel** | ⭐⭐⭐ | $$ | Medium |
 | **Netlify** | ⭐⭐⭐ | $$ | Medium |
 | **Railway** | ⭐⭐ | $$ | High |
 | **DigitalOcean** | ⭐⭐ | $ | High |
@@ -269,6 +260,6 @@ Use a CDN for static assets:
   </Accordion>
 </AccordionGroup>
 
-<Card title="Publishing to Vercel" icon="rocket" href="/features/publishing">
+<Card title="Publishing with Kleap" icon="rocket" href="/features/publishing">
   The easiest deployment option
 </Card>
