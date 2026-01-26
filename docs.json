@@ -217,5 +217,9 @@
       "github": "https://github.com/kleap-ai",
       "discord": "https://discord.gg/kleap"
     }
-  }
+  },
+  "head": [
+    "<script>window.datafast=window.datafast||function(){window.datafast.q=window.datafast.q||[];window.datafast.q.push(arguments)};</script>",
+    "<script defer data-website-id=\"dfid_HStdIT6rGJpTKR4Nxg2hB\" data-domain=\"docs.kleap.co\" data-api-url=\"https://datafa.st/api/events\" src=\"https://datafa.st/js/script.js\"></script>"
+  ]
 }
