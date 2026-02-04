@@ -5,6 +5,10 @@ description: "Connect your own domain to your published app"
 
 Give your app a professional identity by connecting your own domain.
 
+<Info>
+  Custom domains are available on **Pro plans and above**. [Upgrade to Pro](/features/overview) to unlock this feature.
+</Info>
+
 ## Domain Options
 
 ### Kleap Subdomain (Free)
@@ -12,10 +16,10 @@ Give your app a professional identity by connecting your own domain.
 Every published app gets a free URL:
 
 ```
-https://your-app-name.kleap.co
+https://your-app-name.kleap.io
 ```
 
-### Custom Domain
+### Custom Domain (Pro)
 
 Connect your own domain:
 
@@ -28,53 +32,60 @@ https://app.mycompany.com
 
 ### Step 1: Get a Domain
 
-If you don't have a domain, purchase one from:
+You can purchase a domain directly in Kleap (Settings > Domain > Buy New), or use one you already own from:
 
 - [Namecheap](https://namecheap.com)
-- [Google Domains](https://domains.google)
 - [Cloudflare](https://cloudflare.com)
 - [GoDaddy](https://godaddy.com)
 
 ### Step 2: Add Domain in Kleap
 
 1. Go to **Settings** > **Domain**
-2. Click **Add Custom Domain**
+2. Choose **Buy New**, **Transfer**, or **Connect Existing**
 3. Enter your domain (e.g., `myapp.com`)
 4. Copy the DNS records shown
 
 ### Step 3: Configure DNS
 
-Add these records at your domain registrar:
+Add an **A record** at your domain registrar pointing to Kleap's server:
 
 <Tabs>
   <Tab title="Root Domain (myapp.com)">
     | Type | Name | Value |
     |------|------|-------|
-    | A | @ | 76.76.21.21 |
-    | AAAA | @ | 2606:4700:90:0:... |
+    | A | @ | 20.56.72.69 |
+    | A | www | 20.56.72.69 |
   </Tab>
   <Tab title="Subdomain (app.myapp.com)">
     | Type | Name | Value |
     |------|------|-------|
-    | CNAME | app | cname.kleap.co |
+    | A | app | 20.56.72.69 |
   </Tab>
 </Tabs>
+
+<Warning>
+  Kleap only supports **A records**. Do not use CNAME records for your root domain.
+</Warning>
+
+<Info>
+  **Using Cloudflare?** Set the proxy status to **DNS only** (grey cloud icon, not orange). The Cloudflare proxy blocks SSL certificate generation via Let's Encrypt. See the [Cloudflare section](#domain-with-cloudflare) below for details.
+</Info>
 
 ### Step 4: Verify
 
 1. Return to Kleap settings
-2. Click **Verify Domain**
-3. Wait for DNS propagation (up to 48 hours)
+2. Kleap automatically checks your DNS every 10 seconds
+3. Once detected, your SSL certificate is provisioned automatically
 
 <Info>
-  DNS changes typically take 15 minutes to 48 hours to propagate worldwide.
+  DNS changes typically take a few minutes to 48 hours to propagate worldwide.
 </Info>
 
 ## SSL Certificates
 
-Kleap automatically provisions and renews SSL certificates:
+Kleap automatically provisions and renews SSL certificates via Let's Encrypt:
 
-- **Free SSL** - Included with all domains
+- **Free SSL** - Included with all custom domains
 - **Auto-renewal** - Certificates renew automatically
 - **HTTPS enforced** - HTTP redirects to HTTPS
 
@@ -83,61 +94,53 @@ Kleap automatically provisions and renews SSL certificates:
 You can connect multiple domains to one app:
 
 - `myapp.com` (primary)
-- `www.myapp.com` (redirect)
+- `www.myapp.com` (alias)
 - `app.mycompany.com` (alias)
-
-### Setting Primary Domain
-
-1. Go to domain settings
-2. Click the domain to set as primary
-3. Other domains redirect to primary
 
 ## Troubleshooting
 
 <AccordionGroup>
   <Accordion title="Domain not verifying">
-    - Double-check DNS records are correct
+    - Double-check the A record points to `20.56.72.69`
     - Wait up to 48 hours for propagation
     - Use [DNS Checker](https://dnschecker.org) to verify
-    - Ensure no conflicting records exist
+    - Ensure no conflicting A or CNAME records exist for the same name
   </Accordion>
 
   <Accordion title="SSL certificate not issued">
-    - Domain must be verified first
-    - Check for CAA records blocking issuance
-    - Wait 15 minutes after verification
+    - DNS must resolve to `20.56.72.69` first
+    - If using Cloudflare, make sure proxy is **OFF** (grey cloud / DNS only)
+    - Wait 10-15 minutes after DNS propagation
   </Accordion>
 
   <Accordion title="www not working">
-    Add both records:
-    - `myapp.com` → A record
-    - `www.myapp.com` → CNAME to `cname.kleap.co`
+    Add an A record for `www` pointing to `20.56.72.69`, same as the root domain.
   </Accordion>
 
   <Accordion title="Redirect loop">
-    - Disable any proxy (Cloudflare orange cloud)
-    - Or set Cloudflare SSL to "Full (strict)"
+    - If using Cloudflare, disable the proxy (set to DNS only / grey cloud)
+    - Make sure you don't have conflicting CNAME and A records
   </Accordion>
 </AccordionGroup>
 
 ## Domain with Cloudflare
 
-If using Cloudflare DNS:
+If using Cloudflare as your DNS provider:
 
-1. Add CNAME record
-2. Set proxy status to **DNS only** (gray cloud)
-3. Or keep proxied and set SSL to **Full (strict)**
+1. Add an **A record** pointing to `20.56.72.69`
+2. Set proxy status to **DNS only** (grey cloud icon)
+3. Wait for the SSL certificate to be issued (usually under 10 minutes)
 
 <Warning>
-  If using Cloudflare proxy, ensure SSL mode is "Full (strict)" to avoid redirect loops.
+  **Do not enable the Cloudflare proxy (orange cloud)** when first setting up your domain. The proxy blocks SSL certificate generation via Let's Encrypt. You can re-enable it after your site is live, but DNS only mode is recommended.
 </Warning>
 
 ## Removing a Domain
 
 1. Go to **Settings** > **Domain**
-2. Click the domain to remove
+2. Click the trash icon next to the domain
 3. Confirm removal
-4. Update or remove DNS records at registrar
+4. Update or remove DNS records at your registrar
 
 ## Best Practices
 
@@ -145,17 +148,17 @@ If using Cloudflare DNS:
   <Card title="Use subdomains for apps" icon="sitemap">
     Keep `mycompany.com` for your main site, use `app.mycompany.com` for the Kleap app.
   </Card>
-  <Card title="Set up www redirect" icon="arrow-right">
-    Always redirect www to non-www (or vice versa) for consistency.
+  <Card title="Set up www" icon="arrow-right">
+    Add an A record for both `@` and `www` to cover both variants.
   </Card>
   <Card title="Monitor expiration" icon="calendar">
     Set reminders for domain renewal to avoid losing your URL.
   </Card>
-  <Card title="Use reputable registrars" icon="shield">
-    Choose registrars with good security and support.
+  <Card title="Use DNS only on Cloudflare" icon="shield">
+    Keep the grey cloud (DNS only) for reliable SSL certificate provisioning.
   </Card>
 </CardGroup>
 
 <Card title="Publish Your App First" icon="rocket" href="/features/publishing">
-  You need a published app before adding a custom domain
+  You need a published app before adding a custom domain.
 </Card>
